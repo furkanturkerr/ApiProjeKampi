@@ -1,0 +1,24 @@
+using ApiProjeKampi.WebApi.Entities;
+using Microsoft.EntityFrameworkCore;
+
+namespace ApiProjeKampi.WebApi.Context;
+
+public class ApiContext : DbContext
+{
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseSqlServer(
+         "Server=localhost,1995;Database=ApiYummyDb;User Id=sa;Password=Furkan12*;TrustServerCertificate=True;");
+    }
+    
+    public DbSet<Category> Categories { get; set; }
+    public DbSet<Message> Messages { get; set; }
+    public DbSet<Chef> Chefs { get; set; }
+    public DbSet<Contact> Contacts { get; set; }
+    public DbSet<Feature> Features { get; set; }
+    public DbSet<Image> Images { get; set; }    
+    public DbSet<Message> MessagesSent { get; set; }
+    public DbSet<Product> Products { get; set; }
+    public DbSet<Rezervation> Rezervations { get; set; }
+    public DbSet<Testimonial> Testimonials { get; set; }
+}
