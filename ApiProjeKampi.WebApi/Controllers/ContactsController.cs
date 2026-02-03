@@ -45,7 +45,7 @@ namespace ApiProjeKampi.WebApi.Controllers
             return Ok("Silindi");
         }
 
-        [HttpGet]
+        [HttpGet("GetContact")]
         public IActionResult GetContact(int id)
         {
             var value = _context.Contacts.Find(id);

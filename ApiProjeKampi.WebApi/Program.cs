@@ -1,4 +1,7 @@
 using ApiProjeKampi.WebApi.Context;
+using ApiProjeKampi.WebApi.Entities;
+using ApiProjeKampi.WebApi.ValidationRules;
+using FluentValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +9,8 @@ builder.Services.AddControllers();
 
 
 builder.Services.AddDbContext<ApiContext>();
+
+builder.Services.AddScoped<IValidator<Product>, ProductValidator>();
 
 
 builder.Services.AddEndpointsApiExplorer();

@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "hdByqoFQfFs=",
+  "dgSpecHash": "WOIwmFICVbs=",
   "success": true,
   "projectFilePath": "/Users/furkanturker/RiderProjects/ApiProjeKampi/ApiProjeKampi.WebApi/ApiProjeKampi.WebApi.csproj",
   "expectedPackageFiles": [
     "/Users/furkanturker/.nuget/packages/automapper/16.0.0/automapper.16.0.0.nupkg.sha512",
     "/Users/furkanturker/.nuget/packages/azure.core/1.25.0/azure.core.1.25.0.nupkg.sha512",
     "/Users/furkanturker/.nuget/packages/azure.identity/1.7.0/azure.identity.1.7.0.nupkg.sha512",
+    "/Users/furkanturker/.nuget/packages/fluentvalidation/12.1.1/fluentvalidation.12.1.1.nupkg.sha512",
     "/Users/furkanturker/.nuget/packages/humanizer/2.14.1/humanizer.2.14.1.nupkg.sha512",
     "/Users/furkanturker/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/Users/furkanturker/.nuget/packages/humanizer.core.af/2.14.1/humanizer.core.af.2.14.1.nupkg.sha512",

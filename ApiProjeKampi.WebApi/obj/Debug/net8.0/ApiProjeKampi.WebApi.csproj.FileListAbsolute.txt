@@ -258,3 +258,4 @@
 /Users/furkanturker/RiderProjects/ApiProjeKampi/ApiProjeKampi.WebApi/bin/Debug/net8.0/Microsoft.Extensions.Options.dll
 /Users/furkanturker/RiderProjects/ApiProjeKampi/ApiProjeKampi.WebApi/bin/Debug/net8.0/Microsoft.Extensions.Primitives.dll
 /Users/furkanturker/RiderProjects/ApiProjeKampi/ApiProjeKampi.WebApi/bin/Debug/net8.0/System.Diagnostics.DiagnosticSource.dll
+/Users/furkanturker/RiderProjects/ApiProjeKampi/ApiProjeKampi.WebApi/bin/Debug/net8.0/FluentValidation.dll
