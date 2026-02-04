@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiProjeKampi.WebApi", "ApiProjeKampi.WebApi\ApiProjeKampi.WebApi.csproj", "{A933109D-2D86-4190-8E79-718E9F1F726E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiProjeKampi.WebUI", "ApiProjeKampi.WebUI\ApiProjeKampi.WebUI.csproj", "{13E2232E-968D-49DF-BEE6-42B898AA54B3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{A933109D-2D86-4190-8E79-718E9F1F726E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A933109D-2D86-4190-8E79-718E9F1F726E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A933109D-2D86-4190-8E79-718E9F1F726E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13E2232E-968D-49DF-BEE6-42B898AA54B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13E2232E-968D-49DF-BEE6-42B898AA54B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13E2232E-968D-49DF-BEE6-42B898AA54B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13E2232E-968D-49DF-BEE6-42B898AA54B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
