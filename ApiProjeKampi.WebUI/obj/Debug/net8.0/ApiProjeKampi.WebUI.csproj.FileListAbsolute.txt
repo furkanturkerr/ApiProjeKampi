@@ -29,3 +29,6 @@
 /Users/furkanturker/RiderProjects/ApiProjeKampi/ApiProjeKampi.WebUI/obj/Debug/net8.0/ApiProjeKampi.WebUI.pdb
 /Users/furkanturker/RiderProjects/ApiProjeKampi/ApiProjeKampi.WebUI/obj/Debug/net8.0/ApiProjeKampi.WebUI.genruntimeconfig.cache
 /Users/furkanturker/RiderProjects/ApiProjeKampi/ApiProjeKampi.WebUI/obj/Debug/net8.0/ref/ApiProjeKampi.WebUI.dll
+/Users/furkanturker/RiderProjects/ApiProjeKampi/ApiProjeKampi.WebUI/obj/Debug/net8.0/ApiProjeKampi.WebUI.csproj.AssemblyReference.cache
+/Users/furkanturker/RiderProjects/ApiProjeKampi/ApiProjeKampi.WebUI/bin/Debug/net8.0/Newtonsoft.Json.dll
+/Users/furkanturker/RiderProjects/ApiProjeKampi/ApiProjeKampi.WebUI/obj/Debug/net8.0/ApiProje.69CFEC12.Up2Date
