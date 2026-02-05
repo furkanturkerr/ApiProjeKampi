@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ApiProjeKampi.WebUI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c522f9e015c4e320e8f66bca2b8b66260e307c1e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dd08708bb26526d816837951a3db29af7efa43bd")]
 [assembly: System.Reflection.AssemblyProductAttribute("ApiProjeKampi.WebUI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ApiProjeKampi.WebUI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

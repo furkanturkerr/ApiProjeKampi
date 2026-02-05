@@ -34,6 +34,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvX0Fib3V0RGFzaGJvYXJkQ29tcG9uZW50UGFydGlhbC9EZWZhdWx0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/furkanturker/RiderProjects/ApiProjeKampi/ApiProjeKampi.WebUI/Views/Shared/Components/_DefaultMenuCategoryComponentPartial/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvX0RlZmF1bHRNZW51Q2F0ZWdvcnlDb21wb25lbnRQYXJ0aWFsL0RlZmF1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/furkanturker/RiderProjects/ApiProjeKampi/ApiProjeKampi.WebUI/Views/Shared/Components/_DefaultMenuViewComponentPartial/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvX0RlZmF1bHRNZW51Vmlld0NvbXBvbmVudFBhcnRpYWwvRGVmYXVsdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/furkanturker/RiderProjects/ApiProjeKampi/ApiProjeKampi.WebUI/Views/Shared/Components/_FeatureDefaultComponentPartial/Default.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvX0ZlYXR1cmVEZWZhdWx0Q29tcG9uZW50UGFydGlhbC9EZWZhdWx0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
