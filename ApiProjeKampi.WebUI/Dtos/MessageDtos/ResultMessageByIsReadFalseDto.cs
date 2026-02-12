@@ -1,7 +1,8 @@
-namespace ApiProjeKampi.WebApi.Dtos.MessageDtos;
+namespace ApiProjeKampi.WebUI.Dtos.MessageDtos;
 
-public class CreateMessageDto
+public class ResultMessageByIsReadFalseDto
 {
+    public int MessageId { get; set; }
     public string NameSurname { get; set; }
     public string Email { get; set; }
     public string Subject { get; set; }

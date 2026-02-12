@@ -60,5 +60,12 @@ namespace ApiProjeKampi.WebApi.Controllers
             var value = _context.Messages.Find(id);
             return Ok(_mapper.Map<GetByIdMessageDto>(value));
         }
+        
+        [HttpGet("MessageListByIsReadFalse")]
+        public IActionResult MessageListByIsReadFalse()
+        {
+            var value = _context.Messages.Where(x=>x.IsRead == false).ToList();
+            return Ok(value);
+        }
     }
 }
