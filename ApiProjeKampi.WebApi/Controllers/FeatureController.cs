@@ -32,6 +32,7 @@ namespace ApiProjeKampi.WebApi.Controllers
         {
             var value = _mapper.Map<Feature>(createFeatureDto);
             _context.Features.Add(value);
+            _context.SaveChanges();
             return Ok("Ekleme işlemi yapıldı");
         }
 
