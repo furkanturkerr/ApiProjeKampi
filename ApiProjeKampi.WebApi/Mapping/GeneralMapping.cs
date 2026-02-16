@@ -4,6 +4,7 @@ using ApiProjeKampi.WebApi.Dtos.FeatureDtos;
 using ApiProjeKampi.WebApi.Dtos.MessageDtos;
 using ApiProjeKampi.WebApi.Dtos.NotificationDtos;
 using ApiProjeKampi.WebApi.Dtos.ProductDtos;
+using ApiProjeKampi.WebApi.Dtos.TestimonialDtos;
 using ApiProjeKampi.WebApi.Entities;
 using AutoMapper;
 
@@ -35,6 +36,11 @@ public class GeneralMapping : Profile
         CreateMap<About, CreateAboutDto>().ReverseMap();
         CreateMap<About, UpdateAboutDto>().ReverseMap();
         CreateMap<About, ResultAboutDto>().ReverseMap();
+        
+        CreateMap<Testimonial, GetTestimonialByIdDto>().ReverseMap();
+        CreateMap<Testimonial, CreateTestimonialDto>().ReverseMap();
+        CreateMap<Testimonial, UpdateTestimonialDto>().ReverseMap();
+        CreateMap<Testimonial, ResultTestimonialDto>().ReverseMap();
         
         CreateMap<Product, CreateProductDto>().ReverseMap();
         CreateMap<Product, ResultProductWithCategoryDto>().ForMember(x=>x.CategoryName,y=>y.MapFrom(y=>y.Category.Name)).ReverseMap();

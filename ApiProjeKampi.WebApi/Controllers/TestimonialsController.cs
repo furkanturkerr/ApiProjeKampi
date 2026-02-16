@@ -1,5 +1,7 @@
 using ApiProjeKampi.WebApi.Context;
+using ApiProjeKampi.WebApi.Dtos.TestimonialDtos;
 using ApiProjeKampi.WebApi.Entities;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,50 +11,54 @@ namespace ApiProjeKampi.WebApi.Controllers
     [ApiController]
     public class TestimonialsController : ControllerBase
     {
-        private readonly ApiContext _apiContext;
+        private readonly ApiContext _context;
+        private readonly IMapper _mapper;
 
-        public TestimonialsController(ApiContext apiContext)
+        public TestimonialsController(ApiContext context, IMapper mapper)
         {
-            _apiContext = apiContext;
+            _context = context;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public IActionResult TestimonialList()
         {
-            var values = _apiContext.Testimonials.ToList();
-            return Ok(values);
+            var values = _context.Testimonials.ToList();
+            return Ok(_mapper.Map<List<ResultTestimonialDto>>(values));
         }
 
         [HttpPost]
-        public IActionResult CreateTestimonial(Testimonial Testimonial)
+        public IActionResult CreateTestimonial(CreateTestimonialDto createTestimonialDto)
         {
-            _apiContext.Testimonials.Add(Testimonial);
-            _apiContext.SaveChanges();
-            return Ok("Eklendi");
+            var value = _mapper.Map<Testimonial>(createTestimonialDto);
+            _context.Testimonials.Add(value);
+            _context.SaveChanges();
+            return Ok("Ekleme işlemi yapıldı");
         }
 
         [HttpDelete]
         public IActionResult DeleteTestimonial(int id)
         {
-            var value = _apiContext.Testimonials.Find(id);
-            _apiContext.Testimonials.Remove(value);
-            _apiContext.SaveChanges();
-            return Ok("Silindi");
+            var value = _context.Testimonials.Find(id);
+            _context.Testimonials.Remove(value);
+            _context.SaveChanges();
+            return Ok("Silme işlemi yapıldı.");
         }
 
         [HttpGet("GetTestimonial")]
         public IActionResult GetTestimonial(int id)
         {
-            var Testimonial = _apiContext.Testimonials.Find(id);
-            return Ok(Testimonial);
+            var value = _context.Testimonials.Find(id);
+            return Ok(_mapper.Map<GetTestimonialByIdDto>(value));
         }
-
+        
         [HttpPut]
-        public IActionResult UpdateTestimonial(Testimonial Testimonial)
+        public IActionResult UpdateTestimonial(UpdateTestimonialDto updateTestimonialDto)
         {
-            var value = _apiContext.Testimonials.Update(Testimonial);
-            _apiContext.SaveChanges();
-            return Ok("Güncellendi");
+            var valeu = _mapper.Map<Testimonial>(updateTestimonialDto);
+            _context.Testimonials.Update(valeu);
+            _context.SaveChanges();
+            return Ok("Güncelleme işlemi yapıldı");
         }
     }
 }
