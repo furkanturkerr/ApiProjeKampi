@@ -40,7 +40,7 @@ namespace ApiProjeKampi.WebApi.Controllers
             return Ok("Chef silindi");
         }
 
-        [HttpGet("GetChef/{id}")]
+        [HttpGet("GetChef")]
         public IActionResult GetChef(int id)
         {
             var value = _apiContext.Chefs.Find(id);
