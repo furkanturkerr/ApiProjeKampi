@@ -1,4 +1,4 @@
-@model ApiProjeKampi.WebUI.Dtos.WhyYummyDtos.CreateWhyYummyDto?
+@model ApiProjeKampi.WebUI.Dtos.YummyEventsDtos.UpdateYummyEventsDto
 
 @{
     Layout = "~/Views/AdminLayout/Index.cshtml";
@@ -10,20 +10,24 @@
             <div class="col-12 col-md-12 col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Neden Yummy Ekleme</h4>
+                        <h4>Organizasyon Güncelleme</h4>
                     </div>
                     <div class="card-body">
                         <form method="post">
+                            <input type="hidden" asp-for="YummyEventId"/>
                             <label>Başlık</label>
                             <input type="text" asp-for="Title" class="form-control"/>
                             <br/>
                             <label>Açıklama</label>
                             <textarea asp-for="Description" class="form-control" rows="5"></textarea>
                             <br/>
-                            <label>Icon Url</label>
-                            <input type="text" asp-for="IconUrl" class="form-control"/>
+                            <label>Görsel Url</label>
+                            <input type="text" asp-for="ImageUrl" class="form-control"/>
                             <br/>
-                            <button class="btn btn-primary">Kaydet</button>
+                            <label>Görsel Url</label>
+                            <input type="text" asp-for="Price" class="form-control"/>
+                            <br/>
+                            <button class="btn btn-primary">Güncelle</button>
                         </form>
                     </div>
                 </div>
