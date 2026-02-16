@@ -174,6 +174,18 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/furkanturker/RiderProjects/ApiProjeKampi/ApiProjeKampi.WebUI/Views/WhyYummy/CreateWhyYummy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvV2h5WXVtbXkvQ3JlYXRlV2h5WXVtbXkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/furkanturker/RiderProjects/ApiProjeKampi/ApiProjeKampi.WebUI/Views/WhyYummy/UpdateWhyYummy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvV2h5WXVtbXkvVXBkYXRlV2h5WXVtbXkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/furkanturker/RiderProjects/ApiProjeKampi/ApiProjeKampi.WebUI/Views/WhyYummy/WhyYummyList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvV2h5WXVtbXkvV2h5WXVtbXlMaXN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/furkanturker/RiderProjects/ApiProjeKampi/ApiProjeKampi.WebUI/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
