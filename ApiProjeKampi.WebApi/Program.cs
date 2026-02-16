@@ -1,7 +1,6 @@
 using System.Reflection;
 using ApiProjeKampi.WebApi.Context;
-using ApiProjeKampi.WebApi.Entities;
-using ApiProjeKampi.WebApi.Mapping;
+using ApiProjeKampi.WebApi.Dtos.ProductDtos;
 using ApiProjeKampi.WebApi.ValidationRules;
 using FluentValidation;
 
@@ -12,9 +11,6 @@ builder.Services.AddControllers();
 
 builder.Services.AddDbContext<ApiContext>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
-
-builder.Services.AddScoped<IValidator<Product>, ProductValidator>();
-
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

@@ -13,7 +13,21 @@
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.0" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ApiProjeKampi.WebApi\ApiProjeKampi.WebApi.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Views\Features\CreateFeature.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Features\FeatureList.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Features\UpdateFeature.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Productssss\CreateProductss.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Productssss\ProductListss.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Productssss\UpdateProductss.cshtml" />
     </ItemGroup>
 
     <ItemGroup>

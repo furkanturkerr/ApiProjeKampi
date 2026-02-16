@@ -1,9 +1,9 @@
-using ApiProjeKampi.WebApi.Entities;
+using ApiProjeKampi.WebApi.Dtos.ProductDtos;
 using FluentValidation;
 
 namespace ApiProjeKampi.WebApi.ValidationRules;
 
-public class ProductValidator : AbstractValidator<Product>
+public class ProductValidator : AbstractValidator<CreateProductDto>
 {
     public ProductValidator()
     {

@@ -1,52 +1,43 @@
-@model dynamic
+@model List<ApiProjeKampi.WebUI.Dtos.CategoryDtos.ResultCategoryDto>
 
 @{
     Layout = "~/Views/AdminLayout/Index.cshtml";
 }
 
-
-    <section class="section">
-        <div class="section-body">
-            <div class="row">
-                <div class="col-12 col-md-12 col-lg-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Simple</h4>
-                        </div>
-                        <div class="card-body">
-                            <table class="table">
-                                <thead>
+<section class="section">
+    <div class="section-body">
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Kategori Listesi</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Kategori Adı</th>
+                                <th scope="col">Sil</th>
+                                <th scope="col">Güncelle</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var item in Model)
+                            {
                                 <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
-                                    <th scope="col">Handle</th>
+                                    <th scope="row">@item.CategoryId</th>
+                                    <td>@item.Name</td>
+                                    <td><a href="~/Category/DeleteCategory/@item.CategoryId" class="btn btn-danger">Sil</a></td>
+                                    <td><a href="~/Category/UpdateCategory/@item.CategoryId" class="btn btn-warning">Güncelle</a></td>
                                 </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>mdo</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>fat</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>twitter</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                            }
+                            </tbody>
+                        </table>
+                        <a href="~/Category/CreateCategory/" class="btn btn-info">Yeni Kategri Ekle</a>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>

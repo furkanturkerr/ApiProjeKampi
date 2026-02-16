@@ -1,11 +1,23 @@
 {
   "Version": 1,
-  "Hash": "wugNC8dhejWPvTlPtVg1u/iTVv3+6f7qsnlzV4ZLtwg=",
+  "Hash": "JcGmVpwT4hCwbBejU5UDMZsz8vObb13x6z3Iyr7bi4I=",
   "Source": "ApiProjeKampi.WebUI",
   "BasePath": "_content/ApiProjeKampi.WebUI",
   "Mode": "Default",
   "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "/Users/furkanturker/RiderProjects/ApiProjeKampi/ApiProjeKampi.WebApi/ApiProjeKampi.WebApi.csproj",
+      "Version": 2,
+      "Source": "ApiProjeKampi.WebApi",
+      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework"
+    }
+  ],
   "DiscoveryPatterns": [
     {
       "Name": "ApiProjeKampi.WebUI/wwwroot",
