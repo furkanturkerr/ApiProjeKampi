@@ -28,6 +28,7 @@
       <_ContentIncludedByDefault Remove="Views\Productssss\CreateProductss.cshtml" />
       <_ContentIncludedByDefault Remove="Views\Productssss\ProductListss.cshtml" />
       <_ContentIncludedByDefault Remove="Views\Productssss\UpdateProductss.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Message\MessageList.cshtml" />
     </ItemGroup>
 
     <ItemGroup>
