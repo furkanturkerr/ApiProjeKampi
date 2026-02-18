@@ -1,8 +1,10 @@
 using System.Net.Http.Headers;
 using System.Text;
+using System.Text.Json;
 using ApiProjeKampi.WebUI.Dtos.MessageDtos;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace ApiProjeKampi.WebUI.Controllers;
 
@@ -134,10 +136,40 @@ public class MessageController : Controller
     [HttpPost]
     public async Task<IActionResult> SendMessage(CreateMessageDto createMessageDto)
     {
-        var client = _httpClientFactory.CreateClient();
+        var client = new HttpClient();
+        var apiKey = "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";
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
+
+        try
+        {
+            var translateRequestBody = new
+            {
+                inputs = createMessageDto.MessageDetails
+            };
+            var translateJson = JsonSerializer.Serialize(translateRequestBody);
+            var translateContent = new StringContent(translateJson, Encoding.UTF8, "application/json");
+            
+            var translateResponse = await client.PostAsync("https://api-inference.huggingface.co/models/Helsinki-NLP/opus-mt-tr-en", translateContent);
+            var tranlateResponseString = await translateResponse.Content.ReadAsStringAsync();
+            
+            string englishtext = createMessageDto.MessageDetails;
+            if (tranlateResponseString.TrimStart().StartsWith("["))
+            {
+                var translateDock = JsonDocument.Parse(tranlateResponseString);
+                englishtext = translateDock.RootElement[0].GetProperty("translation_text").GetString();
+                
+                ViewBag.v = englishtext;
+            }
+        }
+        catch 
+        {
+            throw;
+        }
+        
+        var client2 = _httpClientFactory.CreateClient();
         var jsonData = JsonConvert.SerializeObject(createMessageDto);
         StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-        var responseMessage = await client.PostAsync("http://localhost:5083/api/Messages", stringContent);
+        var responseMessage = await client2.PostAsync("http://localhost:5083/api/Messages", stringContent);
         if (responseMessage.IsSuccessStatusCode)
         {
             return RedirectToAction("MessageList");

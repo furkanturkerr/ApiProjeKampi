@@ -122,6 +122,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWVzc2FnZS9NZXNzYWdlTGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/furkanturker/RiderProjects/ApiProjeKampi/ApiProjeKampi.WebUI/Views/Message/SendMessage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWVzc2FnZS9TZW5kTWVzc2FnZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/furkanturker/RiderProjects/ApiProjeKampi/ApiProjeKampi.WebUI/Views/Message/UpdateMessage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWVzc2FnZS9VcGRhdGVNZXNzYWdlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
