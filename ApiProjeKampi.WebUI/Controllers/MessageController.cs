@@ -160,10 +160,42 @@ public class MessageController : Controller
                 
                 ViewBag.v = englishtext;
             }
+            
+            var toxicRequestBody = new
+            {
+                inputs = englishtext
+            };
+            var toxicJson = JsonSerializer.Serialize(toxicRequestBody);
+            var toxicContent = new StringContent(toxicJson, Encoding.UTF8, "application/json");
+            
+            var toxicResponse = await client.PostAsync("https://api-inference.huggingface.co/models/deepset/sentence_bert", toxicContent);
+            var toxicResponseString = await toxicResponse.Content.ReadAsStringAsync();
+            if (toxicResponseString.TrimStart().StartsWith("["))
+            {
+                var toxicDock = JsonDocument.Parse(toxicResponseString);
+                foreach (var item in toxicDock.RootElement[0].EnumerateArray())
+                {
+                    string label = item.GetProperty("label").GetString();
+                    double score = item.GetProperty("score").GetDouble();
+
+                    if (score > 0.5)
+                    {
+                        createMessageDto.Status = "Toksik Mesaj!";
+                        break;
+                    }
+                }
+            }
+
+            if (string.IsNullOrEmpty(createMessageDto.Status))
+            {
+                createMessageDto.Status = "Mesaj Alındı!";
+            }
+           
         }
-        catch 
+        catch (Exception ex)
         {
-            throw;
+            
+            createMessageDto.Status = "Onay Bekliyor";
         }
         
         var client2 = _httpClientFactory.CreateClient();
