@@ -11,10 +11,12 @@ namespace ApiProjeKampi.WebUI.Controllers;
 public class MessageController : Controller
 {
      private readonly IHttpClientFactory _httpClientFactory;
+     private readonly IConfiguration _configuration;
 
-    public MessageController(IHttpClientFactory httpClientFactory)
+    public MessageController(IHttpClientFactory httpClientFactory, IConfiguration configuration)
     {
         _httpClientFactory = httpClientFactory;
+        _configuration = configuration;
     }
 
     // GET
@@ -91,7 +93,7 @@ public class MessageController : Controller
         var values = JsonConvert.DeserializeObject<GetMessageByIdDto>(jsonData);
         prompt = values.MessageDetails;
         
-        var apiKey = "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";
+        var apiKey = _configuration["ApiKeys:OpenAI"];
 
         using var client2 = new HttpClient();
         client2.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
@@ -137,7 +139,7 @@ public class MessageController : Controller
     public async Task<IActionResult> SendMessage(CreateMessageDto createMessageDto)
     {
         var client = new HttpClient();
-        var apiKey = "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";
+        var apiKey = _configuration["ApiKeys:HuggingFace"];
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
 
         try

@@ -58,6 +58,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2F0ZWdvcnkvVXBkYXRlQ2F0ZWdvcnkuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/furkanturker/RiderProjects/ApiProjeKampi/ApiProjeKampi.WebUI/Views/Chat/SendChatWithAI.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2hhdC9TZW5kQ2hhdFdpdGhBSS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/furkanturker/RiderProjects/ApiProjeKampi/ApiProjeKampi.WebUI/Views/Chef/ChefList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2hlZi9DaGVmTGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
