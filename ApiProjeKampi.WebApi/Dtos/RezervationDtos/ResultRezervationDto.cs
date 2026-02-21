@@ -10,5 +10,13 @@ public class ResultRezervationDto
     public string Time { get; set; }
     public int CountOfPeople { get; set; }
     public string Message { get; set; }
-    public bool Status { get; set; }
+
+    public ReservationStatus Status { get; set; }
+    
+    public enum ReservationStatus
+    {
+        OnayBekliyor = 0,
+        Onaylandi = 1,
+        IptalEdildi = 2
+    }
 }

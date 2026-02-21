@@ -1,3 +1,5 @@
+using ApiProjeKampi.WebApi.Entities;
+
 namespace ApiProjeKampi.WebApi.Dtos.RezervationDtos;
 
 public class UpdateRezervationDto
@@ -10,5 +12,6 @@ public class UpdateRezervationDto
     public string Time { get; set; }
     public int CountOfPeople { get; set; }
     public string Message { get; set; }
-    public bool Status { get; set; }
+
+    public Rezervation.ReservationStatus Status { get; set; }
 }

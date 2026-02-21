@@ -13,7 +13,14 @@ builder.Services.AddDbContext<ApiContext>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Title = "ApiProjeKampi API",
+        Version = "v1"
+    });
+});
 
 var app = builder.Build();
 
