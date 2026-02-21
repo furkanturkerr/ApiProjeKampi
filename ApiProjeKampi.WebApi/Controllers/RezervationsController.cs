@@ -60,5 +60,72 @@ namespace ApiProjeKampi.WebApi.Controllers
             _context.SaveChanges();
             return Ok("Güncelleme işlemi yapıldı");
         }
+        
+        [HttpGet("GetTotalRezervationCount")]
+        public IActionResult GetTotalRezervationCount()
+        {
+            var value = _context.Rezervations.Count();
+            return Ok(value);
+        }
+        
+        [HttpGet("GetTotalCustomerCount")]
+        public IActionResult GetTotalCustomerCount()
+        {
+            var value = _context.Rezervations.Sum(x => x.CountOfPeople);
+            return Ok(value);
+        }
+        
+        [HttpGet("GetPendingRezervation")]
+        public IActionResult GetPendingRezervation()
+        {
+            var value = _context.Rezervations
+                .Where(x => x.Status == Rezervation.ReservationStatus.OnayBekliyor)
+                .Count();
+
+            return Ok(value);
+        }
+
+        [HttpGet("GetApprovedRezervation")]
+        public IActionResult GetApprovedRezervation()
+        {
+            var value = _context.Rezervations
+                .Where(x => x.Status == Rezervation.ReservationStatus.Onaylandi)
+                .Count();
+
+            return Ok(value);
+        }
+        
+        [HttpGet("GetReservationStats")]
+        public IActionResult GetReservationStats()
+        {
+            DateTime today = DateTime.Today;
+            DateTime fourMonthsAgo = today.AddMonths(-3);
+
+            // Önce veritabanından gruplama
+            var rawData = _context.Rezervations
+                .Where(r => r.Date >= fourMonthsAgo)
+                .GroupBy(r => new { r.Date.Year, r.Date.Month })
+                .Select(g => new
+                {
+                    Year = g.Key.Year,
+                    Month = g.Key.Month,
+                    Approved = g.Count(x => x.Status == Rezervation.ReservationStatus.Onaylandi),
+                    Pending = g.Count(x => x.Status == Rezervation.ReservationStatus.OnayBekliyor),
+                    Canceled = g.Count(x => x.Status == Rezervation.ReservationStatus.IptalEdildi)
+                })
+                .OrderBy(x => x.Year).ThenBy(x => x.Month)
+                .ToList();
+
+            // Bellekte string dönüşümü
+            var result = rawData.Select(x => new ReservationChartDto
+            {
+                Month = new DateTime(x.Year, x.Month, 1).ToString("MMM yyyy"),
+                Approved = x.Approved,
+                Pending = x.Pending,
+                Canceled = x.Canceled
+            }).ToList();
+
+            return Ok(result);
+        }
     }
 }
