@@ -2,6 +2,6 @@ namespace ApiProjeKampi.WebUI.Dtos.ImageDtos;
 
 public class CreateImageDto
 {
-    public int Title { get; set; }
-    public int ImageUrl { get; set; }
+    public string Title { get; set; }
+    public string ImageUrl { get; set; }
 }

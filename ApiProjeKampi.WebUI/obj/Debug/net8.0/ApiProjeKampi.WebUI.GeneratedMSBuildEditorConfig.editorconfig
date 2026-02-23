@@ -106,8 +106,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRmVhdHVyZS9VcGRhdGVGZWF0dXJlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/furkanturker/RiderProjects/ApiProjeKampi/ApiProjeKampi.WebUI/Views/Gallery/CreateImage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvR2FsbGVyeS9DcmVhdGVJbWFnZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/furkanturker/RiderProjects/ApiProjeKampi/ApiProjeKampi.WebUI/Views/Gallery/ImageList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvR2FsbGVyeS9JbWFnZUxpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/furkanturker/RiderProjects/ApiProjeKampi/ApiProjeKampi.WebUI/Views/Gallery/ImageListWithEdit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvR2FsbGVyeS9JbWFnZUxpc3RXaXRoRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/furkanturker/RiderProjects/ApiProjeKampi/ApiProjeKampi.WebUI/Views/Gallery/UpdateImage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvR2FsbGVyeS9VcGRhdGVJbWFnZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/furkanturker/RiderProjects/ApiProjeKampi/ApiProjeKampi.WebUI/Views/Home/Index.cshtml]
@@ -180,6 +192,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/Users/furkanturker/RiderProjects/ApiProjeKampi/ApiProjeKampi.WebUI/Views/Shared/Components/_DashboardWidgetsComponentPartial/Default.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvX0Rhc2hib2FyZFdpZGdldHNDb21wb25lbnRQYXJ0aWFsL0RlZmF1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/furkanturker/RiderProjects/ApiProjeKampi/ApiProjeKampi.WebUI/Views/Shared/Components/_DefaultGaleryComponentPartial/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvX0RlZmF1bHRHYWxlcnlDb21wb25lbnRQYXJ0aWFsL0RlZmF1bHQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/furkanturker/RiderProjects/ApiProjeKampi/ApiProjeKampi.WebUI/Views/Shared/Components/_DefaultMenuCategoryComponentPartial/Default.cshtml]
