@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace ApiProjeKampi.WebApi.Entities;
 
@@ -10,12 +11,14 @@ public class EmployeeTaskChef
 
     [ForeignKey("EmployeeTask")]
     public int EmployeeTaskId { get; set; }
+    [JsonIgnore]
     public EmployeeTask EmployeeTask { get; set; }
 
     [ForeignKey("Chef")]
     public int ChefId { get; set; }
+    [JsonIgnore]
     public Chef Chef { get; set; }
 
     // Ek alan istersen buraya ekle
-    public string RoleInTask { get; set; } 
+    public string RoleInTask { get; set; }
 }

@@ -3865,6 +3865,30 @@
       "PackagePath": "staticwebassets/yummy-red-1.0.0/assets/img/apple-touch-icon.png"
     },
     {
+      "Id": "/Users/furkanturker/RiderProjects/ApiProjeKampi/ApiProjeKampi.WebUI/wwwroot/yummy-red-1.0.0/assets/img/chefs/001.jpg",
+      "PackagePath": "staticwebassets/yummy-red-1.0.0/assets/img/chefs/001.jpg"
+    },
+    {
+      "Id": "/Users/furkanturker/RiderProjects/ApiProjeKampi/ApiProjeKampi.WebUI/wwwroot/yummy-red-1.0.0/assets/img/chefs/002.jpg",
+      "PackagePath": "staticwebassets/yummy-red-1.0.0/assets/img/chefs/002.jpg"
+    },
+    {
+      "Id": "/Users/furkanturker/RiderProjects/ApiProjeKampi/ApiProjeKampi.WebUI/wwwroot/yummy-red-1.0.0/assets/img/chefs/003.jpg",
+      "PackagePath": "staticwebassets/yummy-red-1.0.0/assets/img/chefs/003.jpg"
+    },
+    {
+      "Id": "/Users/furkanturker/RiderProjects/ApiProjeKampi/ApiProjeKampi.WebUI/wwwroot/yummy-red-1.0.0/assets/img/chefs/004.jpg",
+      "PackagePath": "staticwebassets/yummy-red-1.0.0/assets/img/chefs/004.jpg"
+    },
+    {
+      "Id": "/Users/furkanturker/RiderProjects/ApiProjeKampi/ApiProjeKampi.WebUI/wwwroot/yummy-red-1.0.0/assets/img/chefs/005.jpg",
+      "PackagePath": "staticwebassets/yummy-red-1.0.0/assets/img/chefs/005.jpg"
+    },
+    {
+      "Id": "/Users/furkanturker/RiderProjects/ApiProjeKampi/ApiProjeKampi.WebUI/wwwroot/yummy-red-1.0.0/assets/img/chefs/006.jpg",
+      "PackagePath": "staticwebassets/yummy-red-1.0.0/assets/img/chefs/006.jpg"
+    },
+    {
       "Id": "/Users/furkanturker/RiderProjects/ApiProjeKampi/ApiProjeKampi.WebUI/wwwroot/yummy-red-1.0.0/assets/img/chefs/chefs-1.jpg",
       "PackagePath": "staticwebassets/yummy-red-1.0.0/assets/img/chefs/chefs-1.jpg"
     },

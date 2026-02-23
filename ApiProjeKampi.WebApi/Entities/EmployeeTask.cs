@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace ApiProjeKampi.WebApi.Entities;
 
@@ -14,5 +15,6 @@ public class EmployeeTask
     public string TaskStatus { get; set; }
 
     // Many-to-many navigation
+    [JsonIgnore]
     public List<EmployeeTaskChef> EmployeeTaskChefs { get; set; }
 }

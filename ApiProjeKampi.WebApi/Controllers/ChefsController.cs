@@ -26,6 +26,7 @@ namespace ApiProjeKampi.WebApi.Controllers
         [HttpPost]
         public IActionResult CreateChef(Chef chef)
         {
+            chef.EmployeeTaskChefs = null; // Navigation property'yi temizle
             _apiContext.Chefs.Add(chef);
             _apiContext.SaveChanges();
             return Ok("Şef eklendi");
@@ -50,6 +51,7 @@ namespace ApiProjeKampi.WebApi.Controllers
         [HttpPut]
         public IActionResult UpdateChef(Chef chef)
         {
+            chef.EmployeeTaskChefs = null; // Navigation property'yi temizle
             _apiContext.Chefs.Update(chef);
             _apiContext.SaveChanges();
             return Ok("Chef güncellendi");
