@@ -27,4 +27,5 @@ public class ApiContext : DbContext
     public DbSet<About> Abouts { get; set; }
     public DbSet<EmployeeTask> EmployeeTasks { get; set; }
     public DbSet<EmployeeTaskChef> EmployeeTaskChefs { get; set; }
+    public DbSet<GroupReservation> GroupReservations { get; set; }
 }

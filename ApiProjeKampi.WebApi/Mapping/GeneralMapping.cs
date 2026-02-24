@@ -2,6 +2,7 @@ using ApiProjeKampi.WebApi.Dtos.AboutDtos;
 using ApiProjeKampi.WebApi.Dtos.CategoryDtos;
 using ApiProjeKampi.WebApi.Dtos.EmployeeTaskDtos;
 using ApiProjeKampi.WebApi.Dtos.FeatureDtos;
+using ApiProjeKampi.WebApi.Dtos.GroupReservationDtos;
 using ApiProjeKampi.WebApi.Dtos.ImagesDtos;
 using ApiProjeKampi.WebApi.Dtos.MessageDtos;
 using ApiProjeKampi.WebApi.Dtos.NotificationDtos;
@@ -59,6 +60,11 @@ public class GeneralMapping : Profile
         CreateMap<EmployeeTask, CreateEmployeeTaskDto>().ReverseMap();
         CreateMap<EmployeeTask, UpdateEmployeeTaskDto>().ReverseMap();
         CreateMap<EmployeeTask, ResultEmployeeTaskDto>().ReverseMap();
+        
+        CreateMap<GroupReservation, ResultGroupReservationDto>().ReverseMap();
+        CreateMap<GroupReservation, CreateGroupReservationDto>().ReverseMap();
+        CreateMap<GroupReservation, UpdateGroupReservationDto>().ReverseMap();
+        CreateMap<GroupReservation, GetByGroupReservationIdDto>().ReverseMap();
         
         CreateMap<Product, CreateProductDto>().ReverseMap();
         CreateMap<Product, ResultProductWithCategoryDto>().ForMember(x=>x.CategoryName,y=>y.MapFrom(y=>y.Category.Name)).ReverseMap();
