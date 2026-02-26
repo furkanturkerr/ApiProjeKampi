@@ -1,18 +1,42 @@
-@model dynamic
+@model ApiProjeKampi.WebUI.Dtos.ProductDtos.UpdateProductDto
 
 @{
-    Layout = null;
+    Layout = "~/Views/AdminLayout/Index.cshtml";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title>title</title>
-</head>
-<body>
-<div>
-      
-</div>
-</body>
-</html>
+<section class="section">
+    <div class="section-body">
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Ürün Güncelleme</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="post">
+                            <input type="hidden" asp-for="ProductId"/>
+                            <label>Ürün Adı</label>
+                            <input type="text" asp-for="Name" class="form-control"/>
+                            <br/>
+                            <label>Ürün Fiyatı</label>
+                            <input type="number" asp-for="Price" class="form-control"/>
+                            <br/>
+                            <label>Ürün Kategorisi</label>
+                            <select class="form-control" asp-for="CategoryId" asp-items="@ViewBag.Categories">
+                                <option value="">Kategori Seç</option>
+                            </select>
+                            <br/>
+                            <label>Ürün Açıklaması</label>
+                            <textarea class="form-control" asp-for="Description" rows="5"></textarea>
+                            <br/>
+                            <label>Ürün Görseli</label>
+                            <input type="text" asp-for="ImageUrl" class="form-control"/>
+                            <br/>
+                            <button class="btn btn-primary">Güncelle</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

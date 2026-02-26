@@ -2,7 +2,7 @@ using ApiProjeKampi.WebApi.Context;
 using ApiProjeKampi.WebApi.Dtos.ProductDtos;
 using ApiProjeKampi.WebApi.Entities;
 using AutoMapper;
-using FluentValidation;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,69 +12,61 @@ namespace ApiProjeKampi.WebApi.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly ApiContext _context;
+        private readonly ApiContext _apiContext;
         private readonly IMapper _mapper;
 
-        public ProductsController(ApiContext context, IMapper mapper)
+        public ProductsController(ApiContext apiContext, IMapper mapper)
         {
-            _context = context;
+            _apiContext = apiContext;
             _mapper = mapper;
         }
 
         [HttpGet]
-        public IActionResult ProductList()
+        public IActionResult CategoriList()
         {
-            var value = _context.Products.ToList();
-            return Ok(value);
+            var Products = _apiContext.Products.ToList();
+            return Ok(Products);
         }
 
         [HttpPost]
         public IActionResult CreateProduct(CreateProductDto createProductDto)
         {
             var value = _mapper.Map<Product>(createProductDto);
-            _context.Products.Add(value);
-            _context.SaveChanges();
-            return Ok("Ekleme işlemi başarılı");
+            _apiContext.Products.Add(value);
+            _apiContext.SaveChanges();
+            return Ok("Eklendi");
         }
 
         [HttpDelete]
         public IActionResult DeleteProduct(int id)
         {
-            var value = _context.Products.Find(id);
-            _context.Products.Remove(value);
-            _context.SaveChanges();
-            return Ok("Silme başarılı");
-        }
-
-        [HttpPut]
-        public IActionResult UpdateProduct(Product product)
-        {
-            _context.Products.Update(product);
-            _context.SaveChanges();
-            return Ok("Ürün güncellendi");
+            var value = _apiContext.Products.Find(id);
+            _apiContext.Products.Remove(value);
+            _apiContext.SaveChanges();
+            return Ok("Silindi");
         }
 
         [HttpGet("GetProduct")]
         public IActionResult GetProduct(int id)
         {
-            var value = _context.Products.Find(id);
-            return Ok(value);
+            var Product = _apiContext.Products.Find(id);
+            return Ok(Product);
         }
 
-        [HttpPost("CreateProductWithCategory")]
-        public IActionResult CreateProductWithCategory(CreateProductDto createProductDto)
+        [HttpPut]
+        public IActionResult UpdateProduct(UpdateProductDto updateProductDto)
         {
-            var value = _mapper.Map<Product>(createProductDto);
-            _context.Products.Add(value);
-            _context.SaveChanges();
-            return Ok("Ekleme işlemi başarılı");
+            var value = _mapper.Map<Product>(updateProductDto);
+            _apiContext.Products.Update(value);
+            _apiContext.SaveChanges();
+            return Ok("Güncellendi");
         }
-
-        [HttpGet("GetProductWithCategory")]
-        public IActionResult GetProductWithCategory()
+        
+        [HttpGet("GetProductWithProduct")]
+        public IActionResult GetProductWithProduct()
         {
-            var value = _context.Products.Include(x=>x.Category).ToList();
-            return Ok(_mapper.Map<List<ResultProductWithCategoryDto>>(value));
+            var value = _apiContext.Products.Include(x=>x.Category).ToList();
+            return Ok(_mapper.Map<List<ResultProductWithProductDto>>(value));
         }
     }
 }

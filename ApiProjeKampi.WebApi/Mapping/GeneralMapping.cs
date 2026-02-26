@@ -67,6 +67,7 @@ public class GeneralMapping : Profile
         CreateMap<GroupReservation, GetByGroupReservationIdDto>().ReverseMap();
         
         CreateMap<Product, CreateProductDto>().ReverseMap();
-        CreateMap<Product, ResultProductWithCategoryDto>().ForMember(x=>x.CategoryName,y=>y.MapFrom(y=>y.Category.Name)).ReverseMap();
+        CreateMap<Product, UpdateProductDto>().ReverseMap();
+        CreateMap<Product, ResultProductWithProductDto>().ForMember(x=>x.CategoryName,y=>y.MapFrom(y=>y.Category.Name)).ReverseMap();
     }
 }

@@ -2,44 +2,86 @@
 
 @{
     Layout = "~/Views/AdminLayout/Index.cshtml";
-    int count = 0;
 }
 
 <section class="section">
+    <div class="section-header">
+        <h1>Galeri</h1>
+        <div class="section-header-breadcrumb">
+            <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+            <div class="breadcrumb-item">Galeri</div>
+        </div>
+    </div>
+
     <div class="section-body">
-        <div class="row">
-            <div class="col-12 col-md-12 col-lg-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Kategori Listesi</h4>
-                    </div>
-                    <div class="card-body">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Görsel Başlığı</th>
-                                <th scope="col">Sil</th>
-                                <th scope="col">Güncelle</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach (var item in Model)
-                            {
-                                count++;
-                                <tr>
-                                    <th scope="row">@count</th>
-                                    <td>@item.Title</td>
-                                    <td><a href="~/Gallery/DeleteImage/@item.ImageId" class="btn btn-danger">Sil</a></td>
-                                    <td><a href="~/Gallery/UpdateImage/@item.ImageId" class="btn btn-warning">Güncelle</a></td>
-                                </tr>
-                            }
-                            </tbody>
-                        </table>
-                        <a href="~/Gallery/CreateImage" class="btn btn-info">Yeni Görsel Ekle</a>
-                    </div>
-                </div>
+
+        <div class="row mb-3">
+            <div class="col-12 d-flex justify-content-between align-items-center">
+                <p class="text-muted mb-0">Toplam <strong>@Model.Count()</strong> görsel</p>
+                <a href="~/Gallery/CreateImage/" class="btn btn-primary btn-sm">
+                    <i class="fas fa-plus mr-1"></i> Yeni Görsel Ekle
+                </a>
             </div>
         </div>
+
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-4">
+                    <div class="card h-100" style="border-top: 4px solid #6777ef; overflow:hidden;">
+
+                        <!-- Görsel -->
+                        <div style="position:relative; overflow:hidden; height:180px; background:#f8f9fa;">
+                            <img src="@item.ImageUrl"
+                                 alt="@item.Title"
+                                 style="width:100%; height:100%; object-fit:cover; transition: transform 0.3s ease;"
+                                 onmouseover="this.style.transform='scale(1.05)'"
+                                 onmouseout="this.style.transform='scale(1)'"/>
+
+                            <!-- Görsel numarası -->
+                            <span class="badge badge-dark"
+                                  style="position:absolute; top:8px; left:8px; font-size:0.75rem;">
+                                <i class="fas fa-image mr-1"></i> @item.Title
+                            </span>
+                        </div>
+
+                        <!-- Butonlar -->
+                        <div class="card-footer bg-transparent d-flex justify-content-between align-items-center">
+                            <a href="@item.ImageUrl" target="_blank" class="btn btn-outline-primary btn-sm">
+                                <i class="fas fa-eye mr-1"></i> Görüntüle
+                            </a>
+                            <div>
+                                <a href="~/Gallery/UpdateImage/@item.ImageId" class="btn btn-warning btn-sm mr-1">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="~/Gallery/DeleteImage/@item.ImageId"
+                                   class="btn btn-danger btn-sm"
+                                   onclick="return confirm('Bu görseli silmek istediğinize emin misiniz?')">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            }
+
+            @if (Model.Count() == 0)
+            {
+                <div class="col-12">
+                    <div class="card text-center py-5">
+                        <div class="card-body">
+                            <i class="fas fa-images fa-4x text-muted mb-3"></i>
+                            <h4>Henüz görsel eklenmemiş</h4>
+                            <p class="text-muted">Galeri için görsel ekleyin.</p>
+                            <a href="~/Gallery/CreateImage/" class="btn btn-primary mt-2">
+                                <i class="fas fa-plus mr-1"></i> İlk Görseli Ekle
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
     </div>
 </section>

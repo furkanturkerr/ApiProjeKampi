@@ -1,33 +1,216 @@
-
 @{
-    Layout = "~/Views/AdminLayout/Index.cshtml";
+Layout = "~/Views/AdminLayout/Index.cshtml";
 }
 
 <section class="section">
+    <div class="section-header">
+        <h1>AI Tarif Önerisi</h1>
+        <div class="section-header-breadcrumb">
+            <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+            <div class="breadcrumb-item">AI Tarif Önerisi</div>
+        </div>
+    </div>
+
     <div class="section-body">
         <div class="row">
-            <div class="col-12 col-md-12 col-lg-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>OpenAI ile Yapay Zeka Destekli Yemek Tarifi Önerisi</h4>
-                    </div>
+
+            <!-- Sol: Form -->
+            <div class="col-lg-5 col-12">
+
+                <div class="card" style="border-top: 4px solid #6777ef;">
                     <div class="card-body">
-                        <form method="post">
-                            <label>Elinizdeki Malzemeler ve Anahtar Kelimeler</label>
-                            <input type="text" name="prompt" class="form-control"/>
-                            <br/>
-                            <button class="btn btn-primary">Tarif Önerisi Oluştur</button>
+
+                        <!-- Başlık -->
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="bg-primary mr-3"
+                                 style="width:50px;height:50px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                <i class="fas fa-robot text-white" style="font-size:1.3rem;"></i>
+                            </div>
+                            <div>
+                                <h5 class="mb-0 font-weight-bold">OpenAI Tarif Asistanı</h5>
+                                <small class="text-muted">Malzemelerinizi girin, AI tarifini oluştursun</small>
+                            </div>
+                        </div>
+
+                        <form method="post" id="recipeForm">
+
+                            <div class="form-group">
+                                <label class="font-weight-bold small text-uppercase" style="letter-spacing:0.05em; color:#6c757d;">
+                                    <i class="fas fa-carrot text-warning mr-1"></i> Malzemeler
+                                </label>
+                                <textarea name="prompt"
+                                          id="promptInput"
+                                          class="form-control"
+                                          rows="4"
+                                          placeholder="Örn: tavuk, domates, soğan, sarımsak, zeytinyağı..."
+                                          style="resize:none;"
+                                          required></textarea>
+                                <small class="text-muted">
+                                    <i class="fas fa-info-circle mr-1"></i>
+                                    Virgülle ayırarak birden fazla malzeme girebilirsiniz.
+                                </small>
+                            </div>
+
+                            <button class="btn btn-primary btn-block btn-lg" type="submit" id="submitBtn">
+                                <i class="fas fa-magic mr-2"></i> Tarif Oluştur
+                            </button>
+
                         </form>
-                        <br/>
-                        @if (ViewBag.recipe != null)
-                        {
-                            <hr/>
-                            <h5>Oluşturulan AI Yemek Tarifi Önerisi</h5>
-                            @Html.Raw(ViewBag.recipe.ToString())
-                        }
+
+                        <hr/>
+
+                        <!-- Hızlı Öneriler -->
+                        <div>
+                            <small class="font-weight-bold text-muted text-uppercase" style="letter-spacing:0.05em; font-size:0.72rem;">
+                                Hızlı Öneriler
+                            </small>
+                            <div class="mt-2" style="display:flex; flex-wrap:wrap; gap:6px;">
+                                <span class="badge badge-light"
+                                      style="cursor:pointer; padding:7px 12px; font-size:0.82rem; border:1px solid #dee2e6;"
+                                      onclick="setPrompt('tavuk, patates, soğan, sarımsak')">
+                                    🍗 Tavuk & Patates
+                                </span>
+                                <span class="badge badge-light"
+                                      style="cursor:pointer; padding:7px 12px; font-size:0.82rem; border:1px solid #dee2e6;"
+                                      onclick="setPrompt('makarna, domates sosu, peynir, fesleğen')">
+                                    🍝 Makarna
+                                </span>
+                                <span class="badge badge-light"
+                                      style="cursor:pointer; padding:7px 12px; font-size:0.82rem; border:1px solid #dee2e6;"
+                                      onclick="setPrompt('mercimek, havuç, soğan, baharat')">
+                                    🥣 Mercimek Çorbası
+                                </span>
+                                <span class="badge badge-light"
+                                      style="cursor:pointer; padding:7px 12px; font-size:0.82rem; border:1px solid #dee2e6;"
+                                      onclick="setPrompt('yumurta, un, şeker, süt, tereyağı')">
+                                    🎂 Tatlı
+                                </span>
+                                <span class="badge badge-light"
+                                      style="cursor:pointer; padding:7px 12px; font-size:0.82rem; border:1px solid #dee2e6;"
+                                      onclick="setPrompt('pirinç, sebze, soya sosu, zencefil')">
+                                    🍱 Pilav
+                                </span>
+                                <span class="badge badge-light"
+                                      style="cursor:pointer; padding:7px 12px; font-size:0.82rem; border:1px solid #dee2e6;"
+                                      onclick="setPrompt('kıyma, soğan, domates, biber, baharatlar')">
+                                    🥩 Kıymalı
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- AI Bilgi Notu -->
+                        <div class="mt-3 p-3 rounded d-flex align-items-start"
+                             style="background:#f0f3ff; border-left:4px solid #6777ef;">
+                            <i class="fas fa-lightbulb text-primary mr-2 mt-1"></i>
+                            <small class="text-muted">
+                                Ne kadar detaylı malzeme girerseniz, AI o kadar isabetli ve kişiselleştirilmiş tarif önerir.
+                            </small>
+                        </div>
+
                     </div>
                 </div>
+
+            </div>
+
+            <!-- Sağ: Sonuç -->
+            <div class="col-lg-7 col-12">
+
+                <!-- Yükleniyor -->
+                <div id="loadingCard" class="card text-center" style="display:none; border-top:4px solid #3abaf4;">
+                    <div class="card-body py-5">
+                        <div class="mb-3">
+                            <div class="spinner-border text-primary" role="status" style="width:3.5rem;height:3.5rem;">
+                                <span class="sr-only">Yükleniyor...</span>
+                            </div>
+                        </div>
+                        <h5 class="font-weight-bold">AI tarifinizi hazırlıyor...</h5>
+                        <p class="text-muted small mb-0">Bu işlem birkaç saniye sürebilir, lütfen bekleyin.</p>
+                    </div>
+                </div>
+
+                @if (ViewBag.recipe != null)
+                {
+                <!-- Sonuç Kartı -->
+                <div class="card" style="border-top:4px solid #47c363;">
+                    <div class="card-header d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center">
+                            <div class="bg-success mr-3"
+                                 style="width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                <i class="fas fa-utensils text-white"></i>
+                            </div>
+                            <div>
+                                <h5 class="mb-0 font-weight-bold">AI Tarif Önerisi</h5>
+                                <small class="text-muted">OpenAI tarafından oluşturuldu</small>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline-secondary btn-sm" onclick="copyRecipe(this)">
+                            <i class="fas fa-copy mr-1"></i> Kopyala
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div id="recipeContent"
+                             class="p-4 rounded"
+                             style="background:#f8fffe; border:1px solid #d4edda; line-height:2; font-size:0.95rem; min-height:200px;">
+                            @Html.Raw(ViewBag.recipe.ToString())
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent d-flex align-items-center justify-content-between">
+                        <small class="text-muted">
+                            <i class="fas fa-robot mr-1"></i>
+                            Bu tarif yapay zeka tarafından üretilmiştir, kontrol ediniz.
+                        </small>
+                        <span class="badge badge-success py-1 px-2">
+                                <i class="fas fa-check-circle mr-1"></i> Hazır
+                            </span>
+                    </div>
+                </div>
+                }
+                else
+                {
+                <!-- Boş Durum -->
+                <div class="card text-center" style="border-top:4px solid #e9ecef;">
+                    <div class="card-body py-5">
+                        <div class="mb-4"
+                             style="width:80px;height:80px;border-radius:50%;background:#f0f3ff;display:flex;align-items:center;justify-content:center;margin:0 auto;">
+                            <i class="fas fa-utensils text-primary" style="font-size:2rem;"></i>
+                        </div>
+                        <h5 class="font-weight-bold text-muted">Tarifiniz Burada Görünecek</h5>
+                        <p class="text-muted small mb-0">
+                            Sol taraftaki forma malzemelerinizi girin<br/>ve "Tarif Oluştur" butonuna tıklayın.
+                        </p>
+                    </div>
+                </div>
+                }
+
             </div>
         </div>
     </div>
 </section>
+
+<script>
+    function setPrompt(text) {
+        document.getElementById('promptInput').value = text;
+        document.getElementById('promptInput').focus();
+    }
+
+    document.getElementById('recipeForm').addEventListener('submit', function () {
+        document.getElementById('loadingCard').style.display = 'block';
+        var submitBtn = document.getElementById('submitBtn');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Oluşturuluyor...';
+    });
+
+    function copyRecipe(btn) {
+        var text = document.getElementById('recipeContent').innerText;
+        navigator.clipboard.writeText(text).then(function () {
+            btn.innerHTML = '<i class="fas fa-check mr-1"></i> Kopyalandı!';
+            btn.classList.remove('btn-outline-secondary');
+            btn.classList.add('btn-success');
+            setTimeout(function () {
+                btn.innerHTML = '<i class="fas fa-copy mr-1"></i> Kopyala';
+                btn.classList.remove('btn-success');
+                btn.classList.add('btn-outline-secondary');
+            }, 2000);
+        });
+    }
+</script>

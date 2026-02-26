@@ -3,47 +3,181 @@
 @{
     Layout = "~/Views/AdminLayout/Index.cshtml";
     int count = 0;
+    var categories = ViewBag.Categories as List<ApiProjeKampi.WebUI.Dtos.CategoryDtos.ResultCategoryDto> 
+                     ?? new List<ApiProjeKampi.WebUI.Dtos.CategoryDtos.ResultCategoryDto>();
 }
 
 <section class="section">
+    <div class="section-header">
+        <h1>Ürün Listesi</h1>
+        <div class="section-header-breadcrumb">
+            <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+            <div class="breadcrumb-item">Ürün Listesi</div>
+        </div>
+    </div>
+
     <div class="section-body">
-        <div class="row">
-            <div class="col-12 col-md-12 col-lg-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Ürün Listesi</h4>
+
+        <!-- İstatistik Kartları — dinamik -->
+        <div class="row mb-4">
+            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                <div class="card card-statistic-1">
+                    <div class="card-icon bg-primary">
+                        <i class="fas fa-boxes"></i>
                     </div>
+                    <div class="card-wrap">
+                        <div class="card-header"><h4>Toplam Ürün</h4></div>
+                        <div class="card-body">@Model.Count()</div>
+                    </div>
+                </div>
+            </div>
+            @{ 
+                string[] statColors = { "bg-danger", "bg-success", "bg-warning", "bg-info", "bg-secondary" };
+                string[] statIcons  = { "fa-utensils", "fa-leaf", "fa-birthday-cake", "fa-mug-hot", "fa-tag" };
+                int ci = 0;
+            }
+            @foreach (var cat in categories.Take(3))
+            {
+                string col  = ci < statColors.Length ? statColors[ci] : "bg-secondary";
+                string icon = ci < statIcons.Length  ? statIcons[ci]  : "fa-tag";
+                ci++;
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                    <div class="card card-statistic-1">
+                        <div class="card-icon @col">
+                            <i class="fas @icon"></i>
+                        </div>
+                        <div class="card-wrap">
+                            <div class="card-header"><h4>@cat.Name</h4></div>
+                            <div class="card-body">
+                                @Model.Count(x => (x.CategoryName ?? "").ToLower() == (cat.Name ?? "").ToLower())
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h4><i class="fas fa-list mr-2"></i>Ürün Listesi</h4>
+                        <a href="~/Product/CreateProduct/" class="btn btn-primary">
+                            <i class="fas fa-plus mr-1"></i> Yeni Ürün Ekle
+                        </a>
+                    </div>
+
                     <div class="card-body">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Ürün Adı</th>
-                                <th scope="col">Ürün Fiyatı</th>
-                                <th scope="col">Ürün Kategori</th>
-                                <th scope="col">Sil</th>
-                                <th scope="col">Güncelle</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach (var item in Model)
-                            {
-                                count++;
-                                <tr>
-                                    <th scope="row">@count</th>
-                                    <td>@item.Name</td>
-                                    <td>@item.Price</td>
-                                    <td>@item.CategoryName</td>
-                                    <td><a href="~/Product/DeleteProduct/@item.ProductId" class="btn btn-danger">Sil</a></td>
-                                    <td><a href="~/Product/UpdateProduct/@item.ProductId" class="btn btn-warning">Güncelle</a></td>
-                                </tr>
+
+                        <!-- Filtre Butonları — dinamik -->
+                        <div class="mb-3">
+                            <button class="btn btn-dark btn-sm mr-1"
+                                    onclick="filterTable(this, 'all')">
+                                Tümü
+                            </button>
+                            @{ 
+                                string[] btnColors = { "btn-outline-danger", "btn-outline-success", "btn-outline-warning", "btn-outline-info", "btn-outline-secondary" };
+                                int bi = 0;
                             }
-                            </tbody>
-                        </table>
-                        <a href="~/Product/CreateProduct/" class="btn btn-info">Yeni Ürün Ekle</a>
+                            @foreach (var cat in categories)
+                            {
+                                string btnClass = bi < btnColors.Length ? btnColors[bi] : "btn-outline-secondary";
+                                bi++;
+                                string catKey = (cat.Name ?? "").ToLower().Replace(" ", "-");
+                                <button class="btn @btnClass btn-sm mr-1"
+                                        onclick="filterTable(this, '@catKey')">
+                                    @cat.Name
+                                </button>
+                            }
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover" id="productTable">
+                                <thead>
+                                    <tr>
+                                        <th width="50">#</th>
+                                        <th>Ürün Adı</th>
+                                        <th width="130">Fiyat</th>
+                                        <th width="150">Kategori</th>
+                                        <th width="80" class="text-center">Sil</th>
+                                        <th width="100" class="text-center">Güncelle</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        count++;
+                                        string catKey = (item.CategoryName ?? "").ToLower().Replace(" ", "-");
+
+                                        // Her kategoriye sırayla renk ver
+                                        var matchedCat = categories.FirstOrDefault(c =>
+                                            (c.Name ?? "").ToLower() == (item.CategoryName ?? "").ToLower());
+                                        int catIndex = matchedCat != null ? categories.IndexOf(matchedCat) : -1;
+                                        string[] badges = { "badge-danger", "badge-success", "badge-warning", "badge-info", "badge-secondary" };
+                                        string badgeClass = catIndex >= 0 && catIndex < badges.Length
+                                            ? badges[catIndex] : "badge-secondary";
+
+                                        <tr data-cat="@catKey">
+                                            <td><span class="badge badge-light">@count</span></td>
+                                            <td>
+                                                <div class="font-weight-bold">@item.Name</div>
+                                            </td>
+                                            <td>
+                                                <span class="font-weight-bold text-primary">₺@item.Price</span>
+                                            </td>
+                                            <td>
+                                                <span class="badge @badgeClass">@item.CategoryName</span>
+                                            </td>
+                                            <td class="text-center">
+                                                <a href="~/Product/DeleteProduct/@item.ProductId"
+                                                   class="btn btn-danger btn-sm"
+                                                   onclick="return confirm('@item.Name ürününü silmek istediğinize emin misiniz?')">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </td>
+                                            <td class="text-center">
+                                                <a href="~/Product/UpdateProduct/@item.ProductId"
+                                                   class="btn btn-warning btn-sm">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="mt-2 text-muted small">
+                            Toplam <strong id="visibleCount">@Model.Count()</strong> ürün gösteriliyor
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<script>
+    function filterTable(btn, cat) {
+        document.querySelectorAll('[onclick^="filterTable"]').forEach(function(b) {
+            b.classList.remove('btn-dark', 'btn-danger', 'btn-success', 'btn-warning', 'btn-info', 'btn-secondary');
+        });
+        btn.classList.remove(
+            'btn-outline-danger','btn-outline-success',
+            'btn-outline-warning','btn-outline-info','btn-outline-secondary'
+        );
+        btn.classList.add('btn-dark');
+
+        var rows    = document.querySelectorAll('#productTable tbody tr');
+        var visible = 0;
+        rows.forEach(function(row) {
+            if (cat === 'all' || row.getAttribute('data-cat') === cat) {
+                row.style.display = '';
+                visible++;
+            } else {
+                row.style.display = 'none';
+            }
+        });
+        document.getElementById('visibleCount').textContent = visible;
+    }
+</script>

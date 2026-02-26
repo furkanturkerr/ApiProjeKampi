@@ -6,47 +6,208 @@
 }
 
 <section class="section">
+    <div class="section-header">
+        <h1>Gelen Mesajlar</h1>
+        <div class="section-header-breadcrumb">
+            <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+            <div class="breadcrumb-item">Gelen Mesajlar</div>
+        </div>
+    </div>
+
     <div class="section-body">
-        <div class="row">
-            <div class="col-12 col-md-12 col-lg-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Gelen Mesaj Listesi</h4>
+
+        <!-- İstatistik Kartları -->
+        <div class="row mb-4">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                <div class="card card-statistic-1">
+                    <div class="card-icon bg-primary">
+                        <i class="fas fa-envelope"></i>
                     </div>
-                    <div class="card-body">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Gönderici</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Konu</th>
-                                <th scope="col">Tarih</th>
-                                <th scope="col">Mesajı Aç</th>
-                                <th scope="col">Sil</th>
-                                <th scope="col">Güncelle</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach (var item in Model)
-                            {
-                                <tr>
-                                    <th scope="row">@count</th>
-                                    <td>@item.NameSurname</td>
-                                    <td>@item.Email</td>
-                                    <td>@item.Subject</td>
-                                    <td>@item.SendDate.ToString("dd-MMM-yyyy")</td>
-                                    <td><a href="~/Message/AnswerMessageWithOpenAI/@item.MessageId" class="btn btn-warning">Detay</a></td>
-                                    <td><a href="~/Message/DeleteMessage/@item.MessageId" class="btn btn-danger">Sil</a></td>
-                                    <td><a href="~/Message/UpdateMessage/@item.MessageId" class="btn btn-success">Güncelle</a></td>
-                                </tr>
-                            }
-                            </tbody>
-                        </table>
-                        <a href="~/Message/CreateMessage/" class="btn btn-info">Yeni Mesaj Ekle</a>
+                    <div class="card-wrap">
+                        <div class="card-header"><h4>Toplam Mesaj</h4></div>
+                        <div class="card-body">@Model.Count()</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                <div class="card card-statistic-1">
+                    <div class="card-icon bg-success">
+                        <i class="fas fa-calendar-day"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header"><h4>Bugün</h4></div>
+                        <div class="card-body">@Model.Count(x => x.SendDate.Date == DateTime.Today)</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                <div class="card card-statistic-1">
+                    <div class="card-icon bg-warning">
+                        <i class="fas fa-calendar-week"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header"><h4>Bu Hafta</h4></div>
+                        <div class="card-body">@Model.Count(x => x.SendDate >= DateTime.Today.AddDays(-7))</div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h4><i class="fas fa-inbox mr-2"></i>Mesaj Listesi</h4>
+                        <a href="~/Message/CreateMessage/" class="btn btn-primary btn-sm">
+                            <i class="fas fa-plus mr-1"></i> Yeni Mesaj
+                        </a>
+                    </div>
+
+                    <!-- Arama & Filtre -->
+                    <div class="card-body pb-0">
+                        <div class="row align-items-center mb-3">
+                            <div class="col-lg-5 col-md-6 col-12 mb-2">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-search"></i></span>
+                                    </div>
+                                    <input type="text" id="msgSearch" class="form-control"
+                                           placeholder="Gönderici, email veya konu ile ara..."
+                                           onkeyup="msgFilter()" />
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-6 mb-2">
+                                <input type="date" id="msgDate" class="form-control" onchange="msgFilter()" />
+                            </div>
+                            <div class="col-lg-2 col-md-4 col-6 mb-2">
+                                <button class="btn btn-outline-secondary btn-block" onclick="msgReset()">
+                                    <i class="fas fa-redo mr-1"></i> Sıfırla
+                                </button>
+                            </div>
+                        </div>
+                        <div class="mb-2 text-muted small">
+                            <span id="msgCount">@Model.Count()</span> / @Model.Count() mesaj gösteriliyor
+                        </div>
+                    </div>
+
+                    <div class="card-body pt-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover" id="msgTable">
+                                <thead>
+                                    <tr>
+                                        <th width="50">#</th>
+                                        <th>Gönderici</th>
+                                        <th>Konu</th>
+                                        <th width="130">Tarih</th>
+                                        <th width="160" class="text-center">İşlemler</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="msgBody">
+                                    @foreach (var item in Model)
+                                    {
+                                        count++;
+                                        <tr data-name="@item.NameSurname?.ToLower()"
+                                            data-email="@item.Email?.ToLower()"
+                                            data-subject="@item.Subject?.ToLower()"
+                                            data-date="@item.SendDate.ToString("yyyy-MM-dd")">
+                                            <td><span class="badge badge-light">@count</span></td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="bg-primary mr-2"
+                                                         style="width:36px; height:36px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; color:#fff; font-weight:700; font-size:0.85rem; flex-shrink:0;">
+                                                        @(item.NameSurname?.Length > 0 ? item.NameSurname[0].ToString().ToUpper() : "?")
+                                                    </div>
+                                                    <div>
+                                                        <div class="font-weight-bold">@item.NameSurname</div>
+                                                        <div class="text-muted" style="font-size:0.78rem;">@item.Email</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span class="font-weight-bold">@item.Subject</span>
+                                            </td>
+                                            <td>
+                                                <i class="fas fa-calendar text-muted mr-1"></i>
+                                                @item.SendDate.ToString("dd MMM yyyy")
+                                            </td>
+                                            <td class="text-center">
+                                                <a href="~/Message/AnswerMessageWithOpenAI/@item.MessageId"
+                                                   class="btn btn-info btn-sm mr-1"
+                                                   title="Detay & Yanıtla">
+                                                    <i class="fas fa-eye mr-1"></i> Aç
+                                                </a>
+                                                <a href="~/Message/DeleteMessage/@item.MessageId"
+                                                   class="btn btn-danger btn-sm"
+                                                   title="Sil"
+                                                   onclick="return confirm('@item.NameSurname mesajını silmek istediğinize emin misiniz?')">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div id="msgEmpty" class="text-center py-5" style="display:none;">
+                            <i class="fas fa-search fa-3x text-muted mb-3"></i>
+                            <h5 class="text-muted">Sonuç bulunamadı</h5>
+                            <p class="text-muted">Arama kriterlerinizi değiştirin.</p>
+                        </div>
+
+                        @if (Model.Count() == 0)
+                        {
+                            <div class="text-center py-5">
+                                <i class="fas fa-inbox fa-4x text-muted mb-3"></i>
+                                <h5>Henüz mesaj yok</h5>
+                                <p class="text-muted">Gelen mesajlar burada görünecek.</p>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="mt-2 text-muted small">
+                                Toplam <strong>@Model.Count()</strong> mesaj
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </section>
+
+<script>
+    function msgFilter() {
+        var search  = document.getElementById('msgSearch').value.toLowerCase();
+        var date    = document.getElementById('msgDate').value;
+        var rows    = document.querySelectorAll('#msgBody tr');
+        var visible = 0;
+
+        rows.forEach(function(row) {
+            var name    = row.getAttribute('data-name') || '';
+            var email   = row.getAttribute('data-email') || '';
+            var subject = row.getAttribute('data-subject') || '';
+            var rowDate = row.getAttribute('data-date');
+
+            var matchSearch = name.includes(search) || email.includes(search) || subject.includes(search);
+            var matchDate   = date === '' || rowDate === date;
+
+            if (matchSearch && matchDate) {
+                row.style.display = '';
+                visible++;
+            } else {
+                row.style.display = 'none';
+            }
+        });
+
+        document.getElementById('msgCount').textContent = visible;
+        document.getElementById('msgEmpty').style.display = visible === 0 && rows.length > 0 ? 'block' : 'none';
+    }
+
+    function msgReset() {
+        document.getElementById('msgSearch').value = '';
+        document.getElementById('msgDate').value = '';
+        msgFilter();
+    }
+</script>

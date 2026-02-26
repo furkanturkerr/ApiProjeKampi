@@ -1,252 +1,234 @@
 <div class="col-md-6 col-lg-12 col-xl-6">
 
     <!-- Günün Menüsü -->
-    <div class="card mb-3">
-        <div class="card-header bg-primary text-white">
-            <h5 class="mb-0"><i class="fas fa-utensils me-2"></i>Günün Menüsü</h5>
+    <div class="card mb-3" style="border-top: 4px solid #6777ef;">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h6 class="mb-0 font-weight-bold"><i class="fas fa-utensils mr-2 text-primary"></i>Günün Menüsü</h6>
+            <span class="badge badge-primary">@DateTime.Today.ToString("dd MMM yyyy")</span>
         </div>
         <div class="card-body">
-            <div class="d-flex align-items-center mb-3">
-                <span class="badge bg-danger me-2" style="font-size: 14px;">🇵🇪 Peru Mutfağı</span>
-                <small class="text-muted">04 Ara 2025</small>
+            <div class="mb-3">
+                <span class="badge badge-danger" style="font-size:12px;">🇵🇪 Peru Mutfağı</span>
             </div>
             <ul class="list-unstyled mb-0">
-                <li class="mb-2">
-                    <i class="fas fa-star text-warning me-2"></i>
-                    <strong>Ceviche</strong> - ₺150
-                    <span class="badge bg-success ms-2">Popüler</span>
+                <li class="d-flex justify-content-between align-items-center mb-2 p-2 rounded" style="background:#f8f9fa;">
+                    <div>
+                        <i class="fas fa-star text-warning mr-2"></i>
+                        <strong>Ceviche</strong>
+                        <span class="badge badge-success ml-2">Popüler</span>
+                    </div>
+                    <span class="font-weight-bold text-primary">₺150</span>
                 </li>
-                <li class="mb-2">
-                    <i class="fas fa-star text-warning me-2"></i>
-                    <strong>Lomo Saltado</strong> - ₺180
+                <li class="d-flex justify-content-between align-items-center mb-2 p-2 rounded" style="background:#f8f9fa;">
+                    <div>
+                        <i class="fas fa-star text-warning mr-2"></i>
+                        <strong>Lomo Saltado</strong>
+                    </div>
+                    <span class="font-weight-bold text-primary">₺180</span>
                 </li>
-                <li>
-                    <i class="fas fa-star text-warning me-2"></i>
-                    <strong>Aji de Gallina</strong> - ₺140
+                <li class="d-flex justify-content-between align-items-center p-2 rounded" style="background:#f8f9fa;">
+                    <div>
+                        <i class="fas fa-star text-warning mr-2"></i>
+                        <strong>Aji de Gallina</strong>
+                    </div>
+                    <span class="font-weight-bold text-primary">₺140</span>
                 </li>
             </ul>
         </div>
     </div>
 
     <!-- En Yoğun Saat & Ciro -->
-    <div class="row">
-        <div class="col-md-6 mb-3">
-            <div class="card h-100 border-warning">
-                <div class="card-body text-center">
-                    <i class="fas fa-clock fa-2x text-warning mb-2"></i>
-                    <h6 class="text-muted mb-1">En Yoğun Saat</h6>
-                    <h3 class="mb-0 text-warning">19:00 - 21:00</h3>
+    <div class="row mb-3">
+        <div class="col-6">
+            <div class="card h-100" style="border-top: 4px solid #ffa426;">
+                <div class="card-body text-center py-3">
+                    <div class="bg-warning mx-auto mb-2"
+                         style="width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;">
+                        <i class="fas fa-clock text-white"></i>
+                    </div>
+                    <div class="text-muted small mb-1">En Yoğun Saat</div>
+                    <div class="font-weight-bold text-warning" style="font-size:1.1rem;">19:00 - 21:00</div>
                     <small class="text-muted">+45% sipariş artışı</small>
                 </div>
             </div>
         </div>
-        <div class="col-md-6 mb-3">
-            <div class="card h-100 border-success">
-                <div class="card-body text-center">
-                    <i class="fas fa-lira-sign fa-2x text-success mb-2"></i>
-                    <h6 class="text-muted mb-1">Tahmini Günlük Ciro</h6>
-                    <h3 class="mb-0 text-success">₺12,450</h3>
+        <div class="col-6">
+            <div class="card h-100" style="border-top: 4px solid #47c363;">
+                <div class="card-body text-center py-3">
+                    <div class="bg-success mx-auto mb-2"
+                         style="width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;">
+                        <i class="fas fa-lira-sign text-white"></i>
+                    </div>
+                    <div class="text-muted small mb-1">Tahmini Günlük Ciro</div>
+                    <div class="font-weight-bold text-success" style="font-size:1.1rem;">₺12,450</div>
                     <small class="text-success"><i class="fas fa-arrow-up"></i> %18 artış</small>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- AI Operasyon Tahmini -->
-    <div class="card mb-3 border-info">
-        <div class="card-header bg-info text-white">
-            <h5 class="mb-0"><i class="fas fa-robot me-2"></i>AI Operasyon Önerisi</h5>
+    <!-- AI Operasyon Önerisi -->
+    <div class="card mb-3" style="border-top: 4px solid #3abaf4;">
+        <div class="card-header d-flex align-items-center">
+            <div class="bg-info mr-2"
+                 style="width:32px;height:32px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;">
+                <i class="fas fa-robot text-white" style="font-size:0.85rem;"></i>
+            </div>
+            <h6 class="mb-0 font-weight-bold">AI Operasyon Önerisi</h6>
         </div>
-        <div class="card-body">
-            <div class="alert alert-warning mb-2 py-2">
-                <i class="fas fa-exclamation-triangle me-2"></i>
-                <strong>Personel:</strong> Akşam vardiyası için +2 garson öneririz
+        <div class="card-body pb-2">
+            <div class="d-flex align-items-center p-2 rounded mb-2" style="background:#fff8e1; border-left:4px solid #ffc107;">
+                <i class="fas fa-exclamation-triangle text-warning mr-2"></i>
+                <div>
+                    <strong class="small">Personel:</strong>
+                    <span class="small text-muted ml-1">Akşam vardiyası için +2 garson öneririz</span>
+                </div>
             </div>
-            <div class="alert alert-info mb-2 py-2">
-                <i class="fas fa-box me-2"></i>
-                <strong>Stok:</strong> Limon ve domates stoğu kritik seviyede
+            <div class="d-flex align-items-center p-2 rounded mb-2" style="background:#e8f4fd; border-left:4px solid #3abaf4;">
+                <i class="fas fa-box text-info mr-2"></i>
+                <div>
+                    <strong class="small">Stok:</strong>
+                    <span class="small text-muted ml-1">Limon ve domates stoğu kritik seviyede</span>
+                </div>
             </div>
-            <div class="alert alert-success mb-0 py-2">
-                <i class="fas fa-thumbs-up me-2"></i>
-                <strong>Mutfak:</strong> Hazırlık zamanları optimal durumda
+            <div class="d-flex align-items-center p-2 rounded" style="background:#e8f5e9; border-left:4px solid #47c363;">
+                <i class="fas fa-thumbs-up text-success mr-2"></i>
+                <div>
+                    <strong class="small">Mutfak:</strong>
+                    <span class="small text-muted ml-1">Hazırlık zamanları optimal durumda</span>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Trend Ürünler -->
-    <div class="card mb-3">
-        <div class="card-header bg-danger text-white">
-            <h5 class="mb-0"><i class="fas fa-fire me-2"></i>Trend Ürünler</h5>
-        </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-sm mb-0">
-                    <thead>
-                        <tr>
-                            <th>Ürün</th>
-                            <th class="text-center">Sipariş</th>
-                            <th class="text-end">Trend</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <i class="fas fa-trophy text-warning me-2"></i>
-                                Ceviche
-                            </td>
-                            <td class="text-center">
-                                <span class="badge bg-primary">87</span>
-                            </td>
-                            <td class="text-end">
-                                <span class="text-success">
-                                    <i class="fas fa-arrow-up"></i> %32
-                                </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <i class="fas fa-medal text-secondary me-2"></i>
-                                Lomo Saltado
-                            </td>
-                            <td class="text-center">
-                                <span class="badge bg-primary">64</span>
-                            </td>
-                            <td class="text-end">
-                                <span class="text-success">
-                                    <i class="fas fa-arrow-up"></i> %28
-                                </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <i class="fas fa-medal text-warning me-2"></i>
-                                Papa a la Huancaína
-                            </td>
-                            <td class="text-center">
-                                <span class="badge bg-primary">51</span>
-                            </td>
-                            <td class="text-end">
-                                <span class="text-success">
-                                    <i class="fas fa-arrow-up"></i> %15
-                                </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Aji de Gallina</td>
-                            <td class="text-center">
-                                <span class="badge bg-secondary">43</span>
-                            </td>
-                            <td class="text-end">
-                                <span class="text-danger">
-                                    <i class="fas fa-arrow-down"></i> %5
-                                </span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+    <div class="card mb-3" style="border-top: 4px solid #fc544b;">
+        <div class="card-header d-flex align-items-center">
+            <div class="bg-danger mr-2"
+                 style="width:32px;height:32px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;">
+                <i class="fas fa-fire text-white" style="font-size:0.85rem;"></i>
             </div>
+            <h6 class="mb-0 font-weight-bold">Trend Ürünler</h6>
+        </div>
+        <div class="card-body p-0">
+            <table class="table table-hover mb-0">
+                <thead style="background:#f8f9fa;">
+                <tr>
+                    <th class="pl-3" style="font-size:0.78rem; color:#6c757d; font-weight:600; letter-spacing:0.05em;">ÜRÜN</th>
+                    <th class="text-center" style="font-size:0.78rem; color:#6c757d; font-weight:600;">SİPARİŞ</th>
+                    <th class="text-right pr-3" style="font-size:0.78rem; color:#6c757d; font-weight:600;">TREND</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="pl-3">
+                        <i class="fas fa-trophy text-warning mr-2"></i>
+                        <strong>Ceviche</strong>
+                    </td>
+                    <td class="text-center"><span class="badge badge-primary">87</span></td>
+                    <td class="text-right pr-3 text-success font-weight-bold">
+                        <i class="fas fa-arrow-up"></i> %32
+                    </td>
+                </tr>
+                <tr>
+                    <td class="pl-3">
+                        <i class="fas fa-medal text-secondary mr-2"></i>
+                        <strong>Lomo Saltado</strong>
+                    </td>
+                    <td class="text-center"><span class="badge badge-primary">64</span></td>
+                    <td class="text-right pr-3 text-success font-weight-bold">
+                        <i class="fas fa-arrow-up"></i> %28
+                    </td>
+                </tr>
+                <tr>
+                    <td class="pl-3">
+                        <i class="fas fa-medal text-warning mr-2"></i>
+                        Papa a la Huancaína
+                    </td>
+                    <td class="text-center"><span class="badge badge-primary">51</span></td>
+                    <td class="text-right pr-3 text-success font-weight-bold">
+                        <i class="fas fa-arrow-up"></i> %15
+                    </td>
+                </tr>
+                <tr>
+                    <td class="pl-3">Aji de Gallina</td>
+                    <td class="text-center"><span class="badge badge-secondary">43</span></td>
+                    <td class="text-right pr-3 text-danger font-weight-bold">
+                        <i class="fas fa-arrow-down"></i> %5
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
     <!-- Haftalık Performans -->
-    <div class="card mb-3">
-        <div class="card-header bg-dark text-white">
-            <h5 class="mb-0"><i class="fas fa-chart-line me-2"></i>Haftalık Performans</h5>
+    <div class="card mb-3" style="border-top: 4px solid #1C1917;">
+        <div class="card-header d-flex align-items-center">
+            <div class="bg-dark mr-2"
+                 style="width:32px;height:32px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;">
+                <i class="fas fa-chart-line text-white" style="font-size:0.85rem;"></i>
+            </div>
+            <h6 class="mb-0 font-weight-bold">Haftalık Performans</h6>
         </div>
         <div class="card-body">
-            <div class="row text-center">
+            <div class="row text-center mb-3">
                 <div class="col-4">
-                    <h6 class="text-muted small mb-1">Toplam Sipariş</h6>
-                    <h4 class="mb-0">1,247</h4>
+                    <div class="text-muted small mb-1">Toplam Sipariş</div>
+                    <div class="font-weight-bold" style="font-size:1.3rem;">1,247</div>
                     <small class="text-success"><i class="fas fa-arrow-up"></i> %12</small>
                 </div>
-                <div class="col-4 border-start border-end">
-                    <h6 class="text-muted small mb-1">Ortalama Sepet</h6>
-                    <h4 class="mb-0">₺185</h4>
+                <div class="col-4" style="border-left:1px solid #e9ecef; border-right:1px solid #e9ecef;">
+                    <div class="text-muted small mb-1">Ort. Sepet</div>
+                    <div class="font-weight-bold" style="font-size:1.3rem;">₺185</div>
                     <small class="text-success"><i class="fas fa-arrow-up"></i> %8</small>
                 </div>
                 <div class="col-4">
-                    <h6 class="text-muted small mb-1">Müşteri Puanı</h6>
-                    <h4 class="mb-0">4.8 ⭐</h4>
+                    <div class="text-muted small mb-1">Müşteri Puanı</div>
+                    <div class="font-weight-bold" style="font-size:1.3rem;">4.8 ⭐</div>
                     <small class="text-success"><i class="fas fa-arrow-up"></i> 0.2</small>
                 </div>
             </div>
-            <hr>
-            <div class="progress" style="height: 25px;">
-                <div class="progress-bar bg-success" style="width: 78%">Hedef: %78</div>
+            <div class="progress mb-1" style="height:22px; border-radius:6px;">
+                <div class="progress-bar bg-success" style="width:78%; border-radius:6px;">
+                    <span class="small font-weight-bold">Haftalık Hedef: %78</span>
+                </div>
             </div>
             <small class="text-muted">Haftalık ciro hedefine ulaşma oranı</small>
         </div>
     </div>
 
     <!-- Müşteri İstatistikleri -->
-    <div class="card">
-        <div class="card-header bg-secondary text-white">
-            <h5 class="mb-0"><i class="fas fa-users me-2"></i>Müşteri İstatistikleri</h5>
+    <div class="card" style="border-top: 4px solid #6c757d;">
+        <div class="card-header d-flex align-items-center">
+            <div class="bg-secondary mr-2"
+                 style="width:32px;height:32px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;">
+                <i class="fas fa-users text-white" style="font-size:0.85rem;"></i>
+            </div>
+            <h6 class="mb-0 font-weight-bold">Müşteri İstatistikleri</h6>
         </div>
         <div class="card-body">
-            <div class="d-flex justify-content-between mb-2">
-                <span>Yeni Müşteri</span>
+            <div class="d-flex justify-content-between align-items-center mb-1">
+                <span class="small">Yeni Müşteri</span>
                 <strong class="text-primary">342</strong>
             </div>
-            <div class="progress mb-3" style="height: 8px;">
-                <div class="progress-bar bg-primary" style="width: 35%"></div>
+            <div class="progress mb-3" style="height:8px; border-radius:6px;">
+                <div class="progress-bar bg-primary" style="width:35%; border-radius:6px;"></div>
             </div>
 
-            <div class="d-flex justify-content-between mb-2">
-                <span>Düzenli Müşteri</span>
+            <div class="d-flex justify-content-between align-items-center mb-1">
+                <span class="small">Düzenli Müşteri</span>
                 <strong class="text-success">628</strong>
             </div>
-            <div class="progress mb-3" style="height: 8px;">
-                <div class="progress-bar bg-success" style="width: 65%"></div>
+            <div class="progress mb-3" style="height:8px; border-radius:6px;">
+                <div class="progress-bar bg-success" style="width:65%; border-radius:6px;"></div>
             </div>
 
-            <div class="alert alert-light mb-0 py-2">
-                <i class="fas fa-info-circle text-info me-2"></i>
-                <small><strong>%65</strong> müşteri sadakat oranı - Sektör ortalamasının üstünde!</small>
+            <div class="d-flex align-items-center p-2 rounded" style="background:#e8f4fd; border-left:4px solid #3abaf4;">
+                <i class="fas fa-info-circle text-info mr-2"></i>
+                <small><strong>%65</strong> müşteri sadakat oranı — Sektör ortalamasının üstünde!</small>
             </div>
         </div>
     </div>
 
 </div>
-
-<style>
-    .card {
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        border-radius: 8px;
-        transition: transform 0.2s;
-    }
-
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-        }
-
-    .badge {
-        font-weight: 500;
-    }
-
-    .progress {
-        border-radius: 10px;
-    }
-
-    .progress-bar {
-        border-radius: 10px;
-    }
-
-    .alert {
-        border-left: 4px solid;
-    }
-
-    .alert-warning {
-        border-left-color: #ffc107;
-    }
-
-    .alert-info {
-        border-left-color: #17a2b8;
-    }
-
-    .alert-success {
-        border-left-color: #28a745;
-    }
-</style>

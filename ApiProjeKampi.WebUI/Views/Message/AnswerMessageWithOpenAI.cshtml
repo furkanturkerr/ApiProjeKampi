@@ -5,26 +5,129 @@
 }
 
 <section class="section">
+    <div class="section-header">
+        <h1>Mesaj Yanıtla</h1>
+        <div class="section-header-breadcrumb">
+            <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+            <div class="breadcrumb-item"><a href="~/Message/MessageList">Mesajlar</a></div>
+            <div class="breadcrumb-item">Mesaj Yanıtla</div>
+        </div>
+    </div>
+
     <div class="section-body">
         <div class="row">
-            <div class="col-12 col-md-12 col-lg-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>OpenAI ile Otomatik Mesaj Yanıt Sayfası Güncelleme</h4>
-                    </div>
-                    <div class="card-body">
-                        <form method="post">
-                            <label>Müşteri Mesajı</label>
-                            <textarea class="form-control" rows="12" style="height: 300px !important;" asp-for="MessageDetails"></textarea>
-                            <br/>
-                            <label>OpenAI Otomatik Cevabı</label>
-                            <textarea class="form-control" name="ancwerAI" rows="12" style="height: 200px !important;">@ViewBag.ancwerAI</textarea>
-                            <br/>
-                            <button class="btn btn-primary">Cevabı Mail Olarak Gönder</button>
-                        </form>
+
+            <!-- Sol: Müşteri Bilgisi -->
+            <div class="col-lg-4 col-12 mb-4">
+
+                <!-- Müşteri Kartı -->
+                <div class="card" style="border-top:4px solid #6777ef;">
+                    <div class="card-body text-center py-4">
+                        <div class="bg-primary mx-auto mb-3"
+                             style="width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;">
+                            <i class="fas fa-user text-white" style="font-size:1.5rem;"></i>
+                        </div>
+                        <h5 class="font-weight-bold mb-1">@Model.NameSurname</h5>
+                        <div class="text-muted small mb-1">
+                            <i class="fas fa-envelope mr-1"></i>@Model.Email
+                        </div>
+                        <div class="text-muted small mb-3">
+                            <i class="fas fa-calendar mr-1"></i>@Model.SendDate.ToString("dd MMM yyyy · HH:mm")
+                        </div>
+                        <span class="badge badge-warning px-3 py-2">
+                            <i class="fas fa-clock mr-1"></i> Yanıt Bekliyor
+                        </span>
                     </div>
                 </div>
+
+                <!-- Konu Kartı -->
+                <div class="card" style="border-top:4px solid #ffa426;">
+                    <div class="card-header d-flex align-items-center">
+                        <div class="bg-warning mr-2"
+                             style="width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                            <i class="fas fa-tag text-white" style="font-size:0.75rem;"></i>
+                        </div>
+                        <h6 class="mb-0 font-weight-bold">Konu</h6>
+                    </div>
+                    <div class="card-body py-3">
+                        <p class="mb-0 font-weight-bold">@Model.Subject</p>
+                    </div>
+                </div>
+
+                <!-- AI Bilgi Notu -->
+                <div class="card" style="border-top:4px solid #3abaf4;">
+                    <div class="card-body py-3">
+                        <div class="d-flex align-items-start">
+                            <i class="fas fa-robot text-info mr-2 mt-1"></i>
+                            <small class="text-muted" style="line-height:1.6;">
+                                OpenAI müşteri mesajını analiz ederek otomatik yanıt oluşturdu.
+                                Göndermeden önce yanıtı gözden geçirin ve gerekirse düzenleyin.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
             </div>
+
+            <!-- Sağ: Mesaj & Yanıt -->
+            <div class="col-lg-8 col-12">
+                <form method="post">
+
+                    <!-- Müşteri Mesajı -->
+                    <div class="card mb-4" style="border-top:4px solid #6777ef;">
+                        <div class="card-header d-flex align-items-center">
+                            <div class="bg-primary mr-2"
+                                 style="width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                <i class="fas fa-comment text-white" style="font-size:0.8rem;"></i>
+                            </div>
+                            <h6 class="mb-0 font-weight-bold">Müşteri Mesajı</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="p-3 rounded" style="background:#f8f9fa; border-left:4px solid #6777ef; font-size:0.92rem; line-height:1.7; color:#374151;">
+                                @Model.MessageDetails
+                            </div>
+                            <textarea asp-for="MessageDetails" class="d-none"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- AI Yanıtı -->
+                    <div class="card" style="border-top:4px solid #47c363;">
+                        <div class="card-header d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center">
+                                <div class="bg-success mr-2"
+                                     style="width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                    <i class="fas fa-robot text-white" style="font-size:0.8rem;"></i>
+                                </div>
+                                <h6 class="mb-0 font-weight-bold">OpenAI Otomatik Yanıtı</h6>
+                            </div>
+                            <span class="badge badge-success">
+                                <i class="fas fa-check-circle mr-1"></i> AI Oluşturdu
+                            </span>
+                        </div>
+                        <div class="card-body">
+                            <textarea class="form-control"
+                                      name="ancwerAI"
+                                      rows="12"
+                                      placeholder="AI yanıtı burada görünecek..."
+                                      style="border-radius:8px; height: 130px !important; font-size:0.92rem; line-height:1.7; resize:vertical;">@ViewBag.ancwerAI</textarea>
+                            <small class="text-muted mt-2 d-block">
+                                <i class="fas fa-edit mr-1"></i>
+                                Yanıtı göndermeden önce düzenleyebilirsiniz.
+                            </small>
+                        </div>
+                        <div class="card-footer bg-transparent d-flex justify-content-between align-items-center">
+                            <a href="~/Message/MessageList" class="btn btn-outline-secondary">
+                                <i class="fas fa-arrow-left mr-1"></i> Geri Dön
+                            </a>
+                            <button type="submit" class="btn btn-success px-4">
+                                <i class="fas fa-paper-plane mr-2"></i> Cevabı Mail Olarak Gönder
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
         </div>
     </div>
 </section>

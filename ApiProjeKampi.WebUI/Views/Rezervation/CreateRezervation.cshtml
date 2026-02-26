@@ -1,0 +1,170 @@
+@model ApiProjeKampi.WebUI.Dtos.RezervationDtos.ResultRezervationDto
+
+@{
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<section class="section">
+    <div class="section-header">
+        <h1>Yeni Rezervasyon</h1>
+        <div class="section-header-breadcrumb">
+            <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+            <div class="breadcrumb-item"><a href="~/Rezervation/RezervationList">Rezervasyonlar</a></div>
+            <div class="breadcrumb-item">Yeni Rezervasyon</div>
+        </div>
+    </div>
+
+    <div class="section-body">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10 col-12">
+                <div class="card" style="border-top: 4px solid #6777ef;">
+                    <div class="card-header">
+                        <h4><i class="fas fa-calendar-plus mr-2"></i>Rezervasyon Bilgileri</h4>
+                    </div>
+                    <div class="card-body">
+                        <form asp-action="CreateRezervation" asp-controller="Rezervation" method="post">
+
+                            <!-- Müşteri Bilgileri -->
+                            <div class="section-title mt-0 mb-3">
+                                <h6 class="text-primary font-weight-bold">
+                                    <i class="fas fa-user mr-2"></i>Müşteri Bilgileri
+                                </h6>
+                                <hr class="mt-1"/>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Ad Soyad <span class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                            </div>
+                                            <input type="text" name="NameSurname" class="form-control"
+                                                   placeholder="Ad Soyad giriniz" required />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>E-posta <span class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                            </div>
+                                            <input type="email" name="Email" class="form-control"
+                                                   placeholder="E-posta giriniz" required />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Telefon <span class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                            </div>
+                                            <input type="tel" name="PhoneNumber" class="form-control"
+                                                   placeholder="Telefon giriniz" required />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Kişi Sayısı <span class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-users"></i></span>
+                                            </div>
+                                            <input type="number" name="CountOfPeople" class="form-control"
+                                                   placeholder="Kişi sayısı" min="1" max="50" required />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Rezervasyon Bilgileri -->
+                            <div class="section-title mt-3 mb-3">
+                                <h6 class="text-primary font-weight-bold">
+                                    <i class="fas fa-calendar-alt mr-2"></i>Rezervasyon Detayları
+                                </h6>
+                                <hr class="mt-1"/>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Tarih <span class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                            </div>
+                                            <input type="date" name="Date" class="form-control"
+                                                   min="@DateTime.Now.ToString("yyyy-MM-dd")" required />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Saat <span class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-clock"></i></span>
+                                            </div>
+                                            <select name="Time" class="form-control" required>
+                                                <option value="">Saat seçiniz</option>
+                                                <option>12:00</option>
+                                                <option>12:30</option>
+                                                <option>13:00</option>
+                                                <option>13:30</option>
+                                                <option>14:00</option>
+                                                <option>14:30</option>
+                                                <option>18:00</option>
+                                                <option>18:30</option>
+                                                <option>19:00</option>
+                                                <option>19:30</option>
+                                                <option>20:00</option>
+                                                <option>20:30</option>
+                                                <option>21:00</option>
+                                                <option>21:30</option>
+                                                <option>22:00</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Mesaj -->
+                            <div class="section-title mt-3 mb-3">
+                                <h6 class="text-primary font-weight-bold">
+                                    <i class="fas fa-comment-alt mr-2"></i>Ek Notlar
+                                </h6>
+                                <hr class="mt-1"/>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Mesaj / Özel İstek</label>
+                                <textarea name="Message" class="form-control" rows="4"
+                                          placeholder="Özel istek veya notlarınızı buraya yazabilirsiniz..."></textarea>
+                            </div>
+
+                            <!-- Butonlar -->
+                            <div class="d-flex justify-content-between align-items-center mt-4">
+                                <a href="~/Rezervation/RezervationList" class="btn btn-outline-secondary">
+                                    <i class="fas fa-arrow-left mr-1"></i> Geri Dön
+                                </a>
+                                <button type="submit" class="btn btn-primary px-5">
+                                    <i class="fas fa-save mr-1"></i> Rezervasyon Oluştur
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

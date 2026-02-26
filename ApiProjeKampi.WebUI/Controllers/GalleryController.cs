@@ -1,5 +1,4 @@
 using System.Text;
-using ApiProjeKampi.WebApi.Dtos.ImagesDtos;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using CreateImageDto = ApiProjeKampi.WebUI.Dtos.ImageDtos.CreateImageDto;

@@ -1,6 +1,6 @@
 namespace ApiProjeKampi.WebApi.Dtos.ProductDtos;
 
-public class ResultProductWithCategoryDto
+public class ResultProductWithProductDto
 {
     public int ProductId { get; set; }
     public string Name { get; set; }

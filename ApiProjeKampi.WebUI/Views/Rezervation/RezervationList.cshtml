@@ -1,4 +1,5 @@
 @model List<ApiProjeKampi.WebUI.Dtos.RezervationDtos.ResultRezervationDto>
+@using static ApiProjeKampi.WebUI.Dtos.RezervationDtos.ResultRezervationDto
 
 @{
     Layout = "~/Views/AdminLayout/Index.cshtml";
@@ -6,54 +7,333 @@
 }
 
 <section class="section">
+    <div class="section-header">
+        <h1>Rezervasyonlar</h1>
+        <div class="section-header-breadcrumb">
+            <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+            <div class="breadcrumb-item">Rezervasyonlar</div>
+        </div>
+    </div>
+
     <div class="section-body">
-        <div class="row">
-            <div class="col-12 col-md-12 col-lg-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Kategori Listesi</h4>
+
+        <!-- İstatistik Kartları -->
+        <div class="row mb-4">
+            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                <div class="card card-statistic-1" style="cursor:pointer;" onclick="filterStatus('all')">
+                    <div class="card-icon bg-primary">
+                        <i class="fas fa-calendar-alt"></i>
                     </div>
-                    <div class="card-body">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Müşteri Adı</th>
-                                <th scope="col">Rezervasyon Tarihi</th>
-                                <th scope="col">Rezervasyon Saati</th>
-                                <th scope="col">Kişi Sayısı</th>
-                                <th scope="col">Rezervasyon Durumu</th>
-                                <th scope="col">Sil</th>
-                                <th scope="col">Güncelle</th>
-                                <th scope="col">Onayla</th>
-                                <th scope="col">İptal Et</th>
-                                <th scope="col">Beklet</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach (var item in Model)
-                            {
-                                count++;
-                                <tr>
-                                    <th scope="row">@count</th>
-                                    <td>@item.NameSurname</td>
-                                    <td>@item.Date.ToString("dd-MM-yyyy")</td>
-                                    <td>@item.Time</td>
-                                    <td>@item.CountOfPeople</td>
-                                    <td>@item.Status</td>
-                                    <td><a href="~/Rezervation/DeleteRezervation/@item.RezervationId" class="btn btn-danger">Sil</a></td>
-                                    <td><a href="~/Rezervation/UpdateRezervation/@item.RezervationId" class="btn btn-warning">Güncelle</a></td>
-                                    <td><a href="~/Rezervation/AcceptRezervation/@item.RezervationId" class="btn btn-success">Onayla</a></td>
-                                    <td><a href="~/Rezervation/CancelRezervation/@item.RezervationId" class="btn btn-dark">İptal Et</a></td>
-                                    <td><a href="~/Rezervation/WaitRezervation/@item.RezervationId" class="btn btn-info">Bekler</a></td>
-                                </tr>
-                            }
-                            </tbody>
-                        </table>
-                        <a href="~/Rezervation/CreateRezervation/" class="btn btn-info">Yeni Rezervasyon Ekle</a>
+                    <div class="card-wrap">
+                        <div class="card-header"><h4>Toplam</h4></div>
+                        <div class="card-body">@Model.Count()</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                <div class="card card-statistic-1" style="cursor:pointer;" onclick="filterStatus('Onaylandi')">
+                    <div class="card-icon bg-success">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header"><h4>Onaylı</h4></div>
+                        <div class="card-body">@Model.Count(x => x.Status == ReservationStatus.Onaylandi)</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                <div class="card card-statistic-1" style="cursor:pointer;" onclick="filterStatus('OnayBekliyor')">
+                    <div class="card-icon bg-warning">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header"><h4>Bekleyen</h4></div>
+                        <div class="card-body">@Model.Count(x => x.Status == ReservationStatus.OnayBekliyor)</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                <div class="card card-statistic-1" style="cursor:pointer;" onclick="filterStatus('IptalEdildi')">
+                    <div class="card-icon bg-danger">
+                        <i class="fas fa-times-circle"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header"><h4>İptal</h4></div>
+                        <div class="card-body">@Model.Count(x => x.Status == ReservationStatus.IptalEdildi)</div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center flex-wrap" style="gap:10px;">
+                        <h4><i class="fas fa-calendar-alt mr-2"></i>Rezervasyon Listesi</h4>
+                        <a href="~/Rezervation/CreateRezervation/" class="btn btn-primary btn-sm">
+                            <i class="fas fa-plus mr-1"></i> Yeni Rezervasyon
+                        </a>
+                    </div>
+
+                    <!-- Filtre & Arama Çubuğu -->
+                    <div class="card-body pb-0">
+                        <div class="row align-items-center mb-3" style="gap-y:10px;">
+
+                            <!-- Arama -->
+                            <div class="col-lg-4 col-md-6 col-12 mb-2">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-search"></i></span>
+                                    </div>
+                                    <input type="text" id="searchInput" class="form-control"
+                                           placeholder="İsim veya email ile ara..." onkeyup="applyFilters()" />
+                                </div>
+                            </div>
+
+                            <!-- Durum Filtresi -->
+                            <div class="col-lg-2 col-md-6 col-6 mb-2">
+                                <select id="statusFilter" class="form-control" onchange="applyFilters()">
+                                    <option value="all">Tüm Durumlar</option>
+                                    <option value="OnayBekliyor">Onay Bekliyor</option>
+                                    <option value="Onaylandi">Onaylandı</option>
+                                    <option value="IptalEdildi">İptal Edildi</option>
+                                </select>
+                            </div>
+
+                            <!-- Tarih Filtresi -->
+                            <div class="col-lg-2 col-md-6 col-6 mb-2">
+                                <input type="date" id="dateFilter" class="form-control" onchange="applyFilters()" />
+                            </div>
+
+                            <!-- Kişi Sayısı -->
+                            <div class="col-lg-2 col-md-6 col-6 mb-2">
+                                <select id="peopleFilter" class="form-control" onchange="applyFilters()">
+                                    <option value="all">Tüm Kişi Sayıları</option>
+                                    <option value="1-2">1-2 Kişi</option>
+                                    <option value="3-4">3-4 Kişi</option>
+                                    <option value="5-6">5-6 Kişi</option>
+                                    <option value="7+">7+ Kişi</option>
+                                </select>
+                            </div>
+
+                            <!-- Sıfırla -->
+                            <div class="col-lg-2 col-md-6 col-6 mb-2">
+                                <button class="btn btn-outline-secondary btn-block" onclick="resetFilters()">
+                                    <i class="fas fa-redo mr-1"></i> Sıfırla
+                                </button>
+                            </div>
+
+                        </div>
+
+                        <!-- Sonuç Sayısı -->
+                        <div class="mb-2 text-muted small">
+                            <span id="visibleCount">@Model.Count()</span> / @Model.Count() rezervasyon gösteriliyor
+                        </div>
+                    </div>
+
+                    <div class="card-body pt-0">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover" id="rezervTable">
+                                <thead>
+                                    <tr>
+                                        <th width="50">#</th>
+                                        <th>Müşteri</th>
+                                        <th width="120" style="cursor:pointer;" onclick="sortTable('date')">
+                                            Tarih <i class="fas fa-sort text-muted" id="sortIcon"></i>
+                                        </th>
+                                        <th width="80">Saat</th>
+                                        <th width="90" class="text-center">Kişi</th>
+                                        <th width="140" class="text-center">Durum</th>
+                                        <th width="80" class="text-center">İşlemler</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tableBody">
+                                    @foreach (var item in Model)
+                                    {
+                                        count++;
+
+                                        string statusBadge = item.Status switch {
+                                            ReservationStatus.Onaylandi    => "badge-success",
+                                            ReservationStatus.IptalEdildi  => "badge-danger",
+                                            ReservationStatus.OnayBekliyor => "badge-warning",
+                                            _                              => "badge-secondary"
+                                        };
+
+                                        string statusIcon = item.Status switch {
+                                            ReservationStatus.Onaylandi    => "fas fa-check-circle",
+                                            ReservationStatus.IptalEdildi  => "fas fa-times-circle",
+                                            ReservationStatus.OnayBekliyor => "fas fa-clock",
+                                            _                              => "fas fa-question-circle"
+                                        };
+
+                                        string statusText = item.Status switch {
+                                            ReservationStatus.Onaylandi    => "Onaylandı",
+                                            ReservationStatus.IptalEdildi  => "İptal Edildi",
+                                            ReservationStatus.OnayBekliyor => "Onay Bekliyor",
+                                            _                              => "Bilinmiyor"
+                                        };
+
+                                        string statusKey = item.Status switch {
+                                            ReservationStatus.Onaylandi    => "Onaylandi",
+                                            ReservationStatus.IptalEdildi  => "IptalEdildi",
+                                            ReservationStatus.OnayBekliyor => "OnayBekliyor",
+                                            _                              => ""
+                                        };
+
+                                        <tr data-status="@statusKey"
+                                            data-name="@item.NameSurname?.ToLower()"
+                                            data-email="@item.Email?.ToLower()"
+                                            data-date="@item.Date.ToString("yyyy-MM-dd")"
+                                            data-people="@item.CountOfPeople">
+                                            <td><span class="badge badge-light">@count</span></td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="bg-primary mr-2"
+                                                         style="width:34px; height:34px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; color:#fff; font-weight:700; font-size:0.85rem; flex-shrink:0;">
+                                                        @(item.NameSurname?.Length > 0 ? item.NameSurname[0].ToString().ToUpper() : "?")
+                                                    </div>
+                                                    <div>
+                                                        <div class="font-weight-bold">@item.NameSurname</div>
+                                                        <div class="text-muted" style="font-size:0.78rem;">@item.Email</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <i class="fas fa-calendar text-muted mr-1"></i>
+                                                @item.Date.ToString("dd.MM.yyyy")
+                                            </td>
+                                            <td>
+                                                <i class="fas fa-clock text-muted mr-1"></i>
+                                                @item.Time
+                                            </td>
+                                            <td class="text-center">
+                                                <span class="badge badge-light">
+                                                    <i class="fas fa-users mr-1"></i>@item.CountOfPeople kişi
+                                                </span>
+                                            </td>
+                                            <td class="text-center">
+                                                <span class="badge @statusBadge">
+                                                    <i class="@statusIcon mr-1"></i>@statusText
+                                                </span>
+                                            </td>
+                                            <td class="text-center">
+                                                <div class="dropdown">
+                                                    <button class="btn btn-outline-secondary btn-sm dropdown-toggle"
+                                                            type="button" data-toggle="dropdown">
+                                                        <i class="fas fa-ellipsis-h"></i>
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-right">
+                                                        <a class="dropdown-item text-success"
+                                                           href="~/Rezervation/AcceptRezervation/@item.RezervationId">
+                                                            <i class="fas fa-check mr-2"></i> Onayla
+                                                        </a>
+                                                        <a class="dropdown-item text-warning"
+                                                           href="~/Rezervation/WaitRezervation/@item.RezervationId">
+                                                            <i class="fas fa-clock mr-2"></i> Beklet
+                                                        </a>
+                                                        <a class="dropdown-item text-dark"
+                                                           href="~/Rezervation/CancelRezervation/@item.RezervationId">
+                                                            <i class="fas fa-ban mr-2"></i> İptal Et
+                                                        </a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item text-primary"
+                                                           href="~/Rezervation/UpdateRezervation/@item.RezervationId">
+                                                            <i class="fas fa-edit mr-2"></i> Düzenle
+                                                        </a>
+                                                        <a class="dropdown-item text-danger"
+                                                           href="~/Rezervation/DeleteRezervation/@item.RezervationId"
+                                                           onclick="return confirm('@item.NameSurname rezervasyonunu silmek istediğinize emin misiniz?')">
+                                                            <i class="fas fa-trash mr-2"></i> Sil
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Boş Durum -->
+                        <div id="emptyState" class="text-center py-5" style="display:none;">
+                            <i class="fas fa-search fa-3x text-muted mb-3"></i>
+                            <h5 class="text-muted">Sonuç bulunamadı</h5>
+                            <p class="text-muted">Filtre kriterlerinizi değiştirin.</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </section>
+
+<script>
+    var sortAsc = true;
+
+    function applyFilters() {
+        var search  = document.getElementById('searchInput').value.toLowerCase();
+        var status  = document.getElementById('statusFilter').value;
+        var date    = document.getElementById('dateFilter').value;
+        var people  = document.getElementById('peopleFilter').value;
+        var rows    = document.querySelectorAll('#tableBody tr');
+        var visible = 0;
+
+        rows.forEach(function(row) {
+            var name    = row.getAttribute('data-name') || '';
+            var email   = row.getAttribute('data-email') || '';
+            var rowStat = row.getAttribute('data-status');
+            var rowDate = row.getAttribute('data-date');
+            var rowPpl  = parseInt(row.getAttribute('data-people'));
+
+            var matchSearch = name.includes(search) || email.includes(search);
+            var matchStatus = status === 'all' || rowStat === status;
+            var matchDate   = date === '' || rowDate === date;
+
+            var matchPeople = true;
+            if (people === '1-2') matchPeople = rowPpl >= 1 && rowPpl <= 2;
+            else if (people === '3-4') matchPeople = rowPpl >= 3 && rowPpl <= 4;
+            else if (people === '5-6') matchPeople = rowPpl >= 5 && rowPpl <= 6;
+            else if (people === '7+') matchPeople = rowPpl >= 7;
+
+            if (matchSearch && matchStatus && matchDate && matchPeople) {
+                row.style.display = '';
+                visible++;
+            } else {
+                row.style.display = 'none';
+            }
+        });
+
+        document.getElementById('visibleCount').textContent = visible;
+        document.getElementById('emptyState').style.display = visible === 0 ? 'block' : 'none';
+    }
+
+    function filterStatus(status) {
+        document.getElementById('statusFilter').value = status;
+        applyFilters();
+    }
+
+    function resetFilters() {
+        document.getElementById('searchInput').value = '';
+        document.getElementById('statusFilter').value = 'all';
+        document.getElementById('dateFilter').value = '';
+        document.getElementById('peopleFilter').value = 'all';
+        applyFilters();
+    }
+
+    function sortTable(col) {
+        var tbody = document.getElementById('tableBody');
+        var rows  = Array.from(tbody.querySelectorAll('tr'));
+
+        rows.sort(function(a, b) {
+            var aVal = a.getAttribute('data-date');
+            var bVal = b.getAttribute('data-date');
+            return sortAsc ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal);
+        });
+
+        sortAsc = !sortAsc;
+        document.getElementById('sortIcon').className = sortAsc ? 'fas fa-sort-up text-primary' : 'fas fa-sort-down text-primary';
+        rows.forEach(function(r) { tbody.appendChild(r); });
+    }
+</script>

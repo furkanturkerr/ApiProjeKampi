@@ -5,6 +5,15 @@ namespace ApiProjeKampi.WebUI.Controllers;
 
 public class AIController : Controller
 {
+    private readonly string _apiKey;
+    private readonly IHttpClientFactory _httpClientFactory;
+
+    public AIController(IConfiguration configuration, IHttpClientFactory httpClientFactory)
+    {
+        _apiKey = configuration["ApiKeys:OpenAI"];
+        _httpClientFactory = httpClientFactory;
+    }
+
     // GET
     public IActionResult CreateRecipeWithOpenAI()
     {
@@ -14,7 +23,7 @@ public class AIController : Controller
     [HttpPost]
     public async Task<IActionResult> CreateRecipeWithOpenAI(string prompt)
     {
-        var apiKey = "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";
+        var apiKey = _apiKey;
 
         using var client = new HttpClient();
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
