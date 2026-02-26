@@ -25,6 +25,7 @@ public class AboutController : Controller
             var values = JsonConvert.DeserializeObject<List<ResultAboutDto>>(jsonData);
             return View(values);
         }
+        
         return View();
     }
 
